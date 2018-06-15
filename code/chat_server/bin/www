@@ -1,0 +1,135 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('chat-server:server');
+var http = require('http');
+
+
+var socket_io = require('socket.io');
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+var io = socket_io.listen(server);
+console.log('socket.io ready');
+
+var login_ids = {};
+
+io.sockets.on('connection', function(socket) {
+  console.log('connection info : ', socket.request.connection._peername);
+
+  socket.on('hello_message_to_server', function(message) {
+    
+    var message = {msg_type : 'hello', data : '만나서 반갑습니다.'};
+    
+    console.log(message.data);
+    socket.emit('hello_message_to_client', message);
+  });
+
+  socket.on('message', function(message) {
+    switch(message.msg_type) {
+      case 'login':
+        console.log(message);
+        login_ids[message.id] = socket.id;
+        socket.login_id = message.id;
+        
+        var response_message = {msg_type : 'alert', data : '로그인 되었습니다.'};
+        socket.emit('alert', response_message);
+        console.log(login_ids);
+        break;
+      case 'chat':
+
+        if(login_ids[message.recepient]) {
+          io.sockets.connected[login_ids[message.recepient]].emit('message', message);
+          var response_message = {msg_type : 'alert', data : '메시지를 전송하였습니다..'};
+          socket.emit('alert', response_message);
+        } else {
+          var response_message = {msg_type : 'alert', data : '메시지를 전송할 수 없습니다.'};
+          socket.emit('alert', response_message);
+        }
+        break;
+    }
+  });
+});
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
