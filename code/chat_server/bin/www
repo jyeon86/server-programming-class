@@ -63,6 +63,7 @@ io.sockets.on('connection', function(socket) {
 
         if(login_ids[message.recepient]) {
           io.sockets.connected[login_ids[message.recepient]].emit('message', message);
+          
           var response_message = {msg_type : 'alert', data : '메시지를 전송하였습니다..'};
           socket.emit('alert', response_message);
         } else {
