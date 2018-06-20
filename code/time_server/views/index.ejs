@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <script src="./javascripts/jquery-3.1.1.min.js"></script>      
+	<script src="./javascripts/socket.io.js"></script> 
+    <script>
+    	$(function () {
+    		$("#timeButton").bind('click', function(event) {
+
+    			var url = 'http://localhost:3000';
+    			socket = io.connect(url);
+
+    			socket.on('connect', function() {
+    				socket.emit('what_time_is_it', '');
+    				
+    				socket.on('time_is', function(message) {
+    					$("#result").append('<p>' + message + '</p>');
+    				});
+    			});
+    		});
+    	});
+    </script>
+  </head>
+  <body>
+  	<input type="button" id="timeButton" value="What time is it!" />
+  	<div id="result"></div>
+  </body>
+</html>
