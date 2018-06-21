@@ -37,32 +37,50 @@ console.log('socket.io ready');
 
 var login_ids = {};
 
+function sendUserList() {
+  var userList = getUserList();
+  var message = {msg_type : 'user_list', data : userList};
+  io.sockets.emit('user_list', message);
+}
+
+function getUserList() {
+  var key = Object.keys(login_ids);
+
+  return key;
+}
+
 io.sockets.on('connection', function(socket) {
   console.log('connection info : ', socket.request.connection._peername);
 
   socket.on('hello_message_to_server', function(message) {
-    
     var message = {msg_type : 'hello', data : '만나서 반갑습니다.'};
-    
-    console.log(message.data);
     socket.emit('hello_message_to_client', message);
+
+    sendRoomList();
+    sendUserList();
   });
 
   socket.on('message', function(message) {
     switch(message.msg_type) {
       case 'login':
-        console.log(message);
         login_ids[message.id] = socket.id;
         socket.login_id = message.id;
         
         var response_message = {msg_type : 'alert', data : '로그인 되었습니다.'};
         socket.emit('alert', response_message);
-        console.log(login_ids);
+        sendUserList();
         break;
       case 'chat':
+        if(message.chat_type == 'chat') {
+          if(login_ids[message.recepient]) {
+            io.sockets.connected[login_ids[message.recepient]].emit('message', message);
 
-        if(login_ids[message.recepient]) {
-          io.sockets.connected[login_ids[message.recepient]].emit('message', message);
+            var response_message = {msg_type : 'alert', data : '메시지를 전송하였습니다..'};
+            socket.emit('alert', response_message);
+          } 
+        }
+        else if(message.chat_type == 'groupchat') {
+          io.sockets.in(message.roomId).emit('message', message);
           
           var response_message = {msg_type : 'alert', data : '메시지를 전송하였습니다..'};
           socket.emit('alert', response_message);
@@ -70,10 +88,114 @@ io.sockets.on('connection', function(socket) {
           var response_message = {msg_type : 'alert', data : '메시지를 전송할 수 없습니다.'};
           socket.emit('alert', response_message);
         }
+
+        
+        break;
+      case 'create_room':
+        if(io.sockets.adapter.rooms[message.roomId]) {
+          var response_message = {msg_type : 'alert', data : '방이 이미 만들어져 있습니다.'};
+          socket.emit('alert', response_message);
+        } else {
+          socket.join(message.roomId);
+
+          var curRoom = io.sockets.adapter.rooms[message.roomId];
+          curRoom.roomId = message.roomId;
+          curRoom.roomName = message.roomName;
+          curRoom.roomOwner = message.roomOwner;
+          
+          curRoom.userList = [];
+          curRoom.userList.push(message.roomOwner);
+        }
+
+        sendRoomList();
+        break;
+      case 'update_room':
+        var curRoom = io.sockets.adapter.rooms[message.roomId];
+        curRoom.roomName = message.roomName;
+
+        sendRoomList();
+        break;
+      case 'delete_room':
+        if(io.sockets.adapter.rooms[message.roomId]) {
+          socket.leave(message.roomId);
+          delete io.sockets.adapter.rooms[message.roomId];
+        } else {
+          var response_message = {msg_type : 'alert', data : '방이 만들어져 있지 않습니다.'};
+          socket.emit('alert', response_message);
+        }
+
+        sendRoomList();
+        break;
+      case 'join':
+        if(io.sockets.adapter.rooms[message.roomId]) {
+          socket.join(message.roomId);
+          
+          var curRoom = io.sockets.adapter.rooms[message.roomId];
+          curRoom.userList.push(message.user_id); 
+          
+          var response_message = {msg_type : 'alert', data : "방에 입장하였습니다."};
+          socket.emit('alert', response_message);
+        } else {
+          var response_message = {msg_type : 'alert', data : '방이 만들어져 있지 않습니다.'};
+          socket.emit('alert', response_message);
+        }
+
+        sendRoomList();
+        break;
+      case 'leave':
+        if(io.sockets.adapter.rooms[message.roomId]) {
+          socket.leave(message.roomId);
+
+          var curRoom = io.sockets.adapter.rooms[message.roomId];
+          var index = curRoom.userList.indexOf(user_id);
+          if(index > -1) curRoom.userList.splice(index, 1);
+          
+          var response_message = {msg_type : 'alert', data : "방에서 나갔습니다."};
+          socket.emit('alert', response_message);
+        } else {
+          var response_message = {msg_type : 'alert', data : '방이 만들어져 있지 않습니다.'};
+          socket.emit('alert', response_message);
+        }
+
+        sendRoomList();
         break;
     }
   });
 });
+
+function sendRoomList() {
+  var roomList = getRoomList();
+  var message = {msg_type : 'list', data : roomList};
+  io.sockets.emit('list', message);
+}
+
+function getRoomList() {
+  var roomList = [];
+  var userList = [];
+
+  // io.sockets.adapter.rooms object
+  Object.keys(io.sockets.adapter.rooms).forEach(function(roomName) {
+    
+    // io.sockets.adapter.rooms item
+    var outRoom = io.sockets.adapter.rooms[roomName];
+
+    var foundDefault = false;
+
+    Object.keys(outRoom.sockets).forEach(function(key) {
+      if(roomName == key) {
+        foundDefault = true;
+      }
+    });
+
+
+    if(!foundDefault) {
+      roomList.push(outRoom);
+    }
+
+  });
+
+  return roomList;
+}
 
 /**
  * Normalize a port into a number, string, or false.
