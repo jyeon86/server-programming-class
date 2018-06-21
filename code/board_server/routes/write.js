@@ -1,6 +1,18 @@
 // 필요한 모듈을 읽어오는 부분
 var express = require('express');
 var router = express.Router();
+var mysql = require('mysql');
+var db_info = require('./db_info');
+
+var pool = mysql.createPool({
+    host : db_info.getHost(),
+    port : db_info.getPort(),
+    user : db_info.getUser(),
+    password : db_info.getPassword(),
+    database : db_info.getDatabase(),
+    connectionLimit : 20,
+    waitForConnections : false
+});
 
 /* GET home page. */
 // 미들웨어 부분
@@ -8,8 +20,32 @@ var router = express.Router();
 // 이때 전달할 데이터를 담은 객체도 같이 보낸다,
 // title >> 키
 // 'Express' >> 값
-router.get('/write', function(req, res, next) {
+router.get('/', function(req, res, next) {
   res.render('write', { title: 'Express' });
+});
+
+router.post('/', function(req, res, next) {
+	var title = req.body.titleInput;
+	var name = req.body.nameInput;
+	var contents = req.body.contentsInput;
+	var category = req.body.categoryInput;
+
+	pool.getConnection(function(err, connection) {
+		if(err) {
+			console.log("getConnection Error");
+			throw err;
+		}
+		var sql = "INSERT INTO my_board (title, name, category, contents, update_at, create_at) VALUES ('"+title+"', '"+name+"', '"+category+"', '"+contents+"', now(), now())";
+		var query = connection.query(sql, function(err, rows) {
+			if(err) {
+				console.log("query Error");
+				connection.release();
+				throw err;
+			}
+			res.redirect('./');
+			connection.release();
+		});
+	});
 });
 
 module.exports = router;

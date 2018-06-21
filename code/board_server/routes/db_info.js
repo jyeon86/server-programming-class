@@ -1,8 +1,8 @@
-var host = 'localhost';
+var host = 'ec2-13-124-177-129.ap-northeast-2.compute.amazonaws.com';
 var port = 3306;
 var user = 'root';
-var password = 'qwe123';
-var database = 'world';
+var password = 'raejin';
+var database = 'student2';
 
 exports.getHost = function () {
     return host;

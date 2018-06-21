@@ -28,18 +28,48 @@ router.get('/:idx', function(req, res, next) {
     // 데이터베이스를 활용하기 위해 풀에서 연결을 가져옴
     pool.getConnection(function(err, connection) {
         // 데이터 베이스에서 실행시킬 sql문(query)을 작성
-        var query = connection.query('select * from my_board where _idx = '+idx, function(err, rows) {
+
+        var sql = "UPDATE my_board SET hit_count = hit_count + 1 WHERE _idx = " + idx;
+
+        var query2 = connection.query(sql, function(err, rows) {
             if(err) {// sql문 작성시 에러가 발생할 경우
                 connection.release();
                 throw err;
             }
-            //read.ejs를 클라이언트 화면에 표시할때 데이터베이스 검색 결과인 rows도 같이 전달한다.
-            res.render('read', { rows : rows });
-            connection.release();
-            
+
+            var query = connection.query('select * from my_board where _idx = '+idx, function(err, rows) {
+                if(err) {// sql문 작성시 에러가 발생할 경우
+                    connection.release();
+                    throw err;
+                }
+                //read.ejs를 클라이언트 화면에 표시할때 데이터베이스 검색 결과인 rows도 같이 전달한다.
+                res.render('read', { rows : rows });
+                connection.release();     
+            });
         });
     });
-  
 });
+
+router.post('/:idx', function(req, res, next) {
+    var idx = req.body.idx;
+
+    pool.getConnection(function(err, connection) {
+        if(err) {
+            console.log("getConnection Error");
+            throw err;
+        }
+        var sql = "UPDATE my_board SET best_count = best_count + 1 WHERE _idx = " + idx;
+        var query = connection.query(sql, function(err, rows) {
+            if(err) {
+                console.log("query Error");
+                connection.release();
+                throw err;
+            }
+            res.redirect('http://localhost:3000');
+            connection.release();
+        });
+    });
+});
+
 
 module.exports = router;
