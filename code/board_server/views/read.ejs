@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+      
+      <table border="1">
+        <tr>
+            <td>글번호</td>
+            <td><%= rows[0]._idx %></td>
+        </tr>
+          <tr>
+            <td>제목</td>
+            <td><%= rows[0].title %></td>
+        </tr>
+          <tr>
+            <td>이름</td>
+            <td><%= rows[0].name %></td>
+        </tr>
+          <tr>
+            <td>조회수</td>
+            <td><%= rows[0].hit_count %></td>
+        </tr>
+          <tr>
+            <td>추천수</td>
+            <td><%= rows[0].best_count %></td>
+        </tr>
+          <tr>
+            <td>카테고리</td>
+            <td><%= rows[0].category %></td>
+        </tr>
+          <tr>
+            <td>내용</td>
+            <td><%= rows[0].contents %></td>
+        </tr>
+          <tr>
+            <td>수정일</td>
+            <td><%= rows[0].update_at %></td>
+        </tr>
+          <tr>
+            <td>작성일</td>
+            <td><%= rows[0].create_at %></td>
+        </tr>
+      </table>
+  </body>
+</html>

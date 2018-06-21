@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+      <table border='1'>
+        <tr>
+            <td>글번호</td>
+            <td>제목</td>
+            <td>이름</td>
+            <td>조회수</td>
+            <td>추천수</td>
+            <td>카테고리</td>
+            
+        </tr>
+          
+          <%
+            for(var i = 0; i < rows.length; i++) {
+          %>
+          <tr>
+              <td><%= rows[i]._idx %></td>
+              <td><a href="./read/<%= rows[i]._idx %>"><%= rows[i].title %></a></td>
+              <td><%= rows[i].name %></td>
+              <td><%= rows[i].hit_count %></td>
+              <td><%= rows[i].best_count %></td>
+              <td><%= rows[i].category %></td>
+   
+          </tr>
+          
+          <%
+          }
+          %>
+      </table>
+  </body>
+</html>
