@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script>
+      function onWriteSubmit() {
+        var title = document.getElementById('titleInput').value; 
+        var name = document.getElementById('nameInput').value; 
+        var contents = document.getElementById('contentsInput').value; 
+        if(title.length > 100) { 
+          alert("제목은 100글자 이상 입력할 수 없습니다."); 
+          return false; 
+        } 
+        if(title == "") { 
+          alert("제목을 입력해야 합니다"); 
+          return false; 
+        } 
+        if(name.length > 20) { 
+          alert("이름은 20글자 이상 입력할 수 없습니다."); 
+          return false; 
+        } 
+        if(name == "") { 
+          alert("이름을 입력해야 합니다"); 
+          return false; 
+        } 
+        if(contents.length > 1000) { 
+          alert("내용은 1000글자 이상 입력할 수 없습니다."); 
+          return false; 
+        } 
+        if(contents == "") { 
+          alert("내용을 입력해야 합니다"); 
+          return false; 
+        }  
+      }
+
+    </script>
+  </head>
+  <body>
+      <h1>글쓰기</h1>
+      <form method="post" action="./write" onsubmit="return onWriteSubmit()">
+      
+        <table border="1" width="100%">
+          <tr>
+              <td>제목</td>
+              <td><input type="text" name="titleInput" id="titleInput" placeholder="제목을 입력해주세요."></td>
+          </tr>
+          <tr>
+              <td>이름</td>
+              <td><input type="text" name="nameInput" id="nameInput" placeholder="이름을 입력해주세요."></td>
+          </tr>
+          <tr>
+              <td>카테고리</td>
+              <td>
+                <select name="categoryInput" id="categoryInput">
+                  <option value="일반" selected="selected">일반</option>
+                  <option value="회원">회원</option>
+                </select>
+              </td>
+          </tr>
+            <tr>
+              <td>내용</td>
+              <td><textarea name="contentsInput" id="contentsInput" rows="5" cals="40" placeholder="내용을 입력해주세요."></textarea></td>
+          </tr>
+          <tr>
+            <td colspan="2"><input type="submit" value="글 등록하기"></td>
+          </tr>
+        </table>
+
+      </form>
+  </body>
+</html>

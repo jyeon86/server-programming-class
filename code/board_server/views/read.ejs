@@ -11,38 +11,61 @@
             <td>글번호</td>
             <td><%= rows[0]._idx %></td>
         </tr>
-          <tr>
+        <tr>
             <td>제목</td>
             <td><%= rows[0].title %></td>
         </tr>
-          <tr>
+        <tr>
             <td>이름</td>
             <td><%= rows[0].name %></td>
         </tr>
-          <tr>
+        <tr>
             <td>조회수</td>
             <td><%= rows[0].hit_count %></td>
         </tr>
-          <tr>
+        <tr>
             <td>추천수</td>
             <td><%= rows[0].best_count %></td>
         </tr>
-          <tr>
+        <tr>
             <td>카테고리</td>
             <td><%= rows[0].category %></td>
         </tr>
-          <tr>
+        <tr>
             <td>내용</td>
             <td><%= rows[0].contents %></td>
         </tr>
-          <tr>
+        <tr>
             <td>수정일</td>
             <td><%= rows[0].update_at %></td>
         </tr>
-          <tr>
+        <tr>
             <td>작성일</td>
             <td><%= rows[0].create_at %></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+              <!-- 
+              localhost:3000/read 주소로 글 번호 데이터(_idx)를 보내는 post 방식 예시
+              hidden 속성의 input 값을 전송하게 된다.
+              -->
+              <form method="post" action='/read'>
+                <input type="hidden" id="idx" name="idx" value="<%= rows[0]._idx %>">
+                <input type="submit" value="추천하기">
+              </form>
+              <!--
+              사이트 주소에 글 번호 데이터(_idx)를 포함해서 전달하는 get 방식 예시
+              -->
+              <input type="button" value="수정하기" onclick="window.location.href='http://localhost:3000/update/<%= rows[0]._idx %>'">
+            </td>
         </tr>
       </table>
   </body>
 </html>
+
+
+
+
+
+
+
