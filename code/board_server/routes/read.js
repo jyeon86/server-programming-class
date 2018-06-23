@@ -50,7 +50,8 @@ router.get('/:idx', function(req, res, next) {
     });
 });
 
-router.post('/:idx', function(req, res, next) {
+router.post('/', function(req, res, next) {
+    console.dir(req.body);
     var idx = req.body.idx;
 
     pool.getConnection(function(err, connection) {
@@ -58,7 +59,8 @@ router.post('/:idx', function(req, res, next) {
             console.log("getConnection Error");
             throw err;
         }
-        var sql = "UPDATE my_board SET best_count = best_count + 1 WHERE _idx = " + idx;
+        var sql = "UPDATE my_board SET "+
+                "best_count = best_count + 1 WHERE _idx = " + idx;
         var query = connection.query(sql, function(err, rows) {
             if(err) {
                 console.log("query Error");

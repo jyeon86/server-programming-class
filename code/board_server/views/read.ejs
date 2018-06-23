@@ -45,13 +45,27 @@
         </tr>
         <tr>
             <td colspan="2">
-              <form method="post" action='./read'>
+              <!-- 
+              localhost:3000/read 주소로 글 번호 데이터(_idx)를 보내는 post 방식 예시
+              hidden 속성의 input 값을 전송하게 된다.
+              -->
+              <form method="post" action='/read'>
                 <input type="hidden" id="idx" name="idx" value="<%= rows[0]._idx %>">
                 <input type="submit" value="추천하기">
               </form>
-                <input type="button" value="수정하기" onclick="window.location.href='http://localhost:3000/update/<%= rows[0]._idx %>'">
+              <!--
+              사이트 주소에 글 번호 데이터(_idx)를 포함해서 전달하는 get 방식 예시
+              -->
+              <input type="button" value="수정하기" onclick="window.location.href='http://localhost:3000/update/<%= rows[0]._idx %>'">
             </td>
         </tr>
       </table>
   </body>
 </html>
+
+
+
+
+
+
+

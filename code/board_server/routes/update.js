@@ -31,7 +31,7 @@ router.get('/:idx', function(req, res, next) {
 				connection.release();
 				throw err;
 			}
-			res.render('update', { rows : rows});
+			res.render('update.ejs', { rows : rows});
 			connection.release();
 		});
 	});

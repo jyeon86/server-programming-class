@@ -24,25 +24,39 @@ router.get('/', function(req, res, next) {
   res.render('write', { title: 'Express' });
 });
 
+
 router.post('/', function(req, res, next) {
+	// 클라이언트로 부터 전달 받은 데이터들(데이터베이스로 넣을 데이터들)
 	var title = req.body.titleInput;
 	var name = req.body.nameInput;
 	var contents = req.body.contentsInput;
 	var category = req.body.categoryInput;
-
+	console.log(title, name, contents, category);
+	// 데이터 베이스와 서버가 연결되기 시작
 	pool.getConnection(function(err, connection) {
+		// 데이터베이스와 서버가 연결될 때 에러가 발생하면 실행되는 부분이다.
 		if(err) {
 			console.log("getConnection Error");
 			throw err;
 		}
-		var sql = "INSERT INTO my_board (title, name, category, contents, update_at, create_at) VALUES ('"+title+"', '"+name+"', '"+category+"', '"+contents+"', now(), now())";
+		// sql문을 작성한다.(데이터베이스에 넣을 데이터와 sql문을 조합한 형태이다.)
+		var sql = "INSERT INTO my_board (title, name, category,"+
+		" contents, update_at, create_at) VALUES "+
+		"('"+title+"', '"+name+"', '"+category+"', '"+contents+"', "+
+		"now(), now())";
+
+		console.log(sql);
+		// 데이터베이스 연결을 통해서 sql문을 실행한다.
+		// 실행한 결과는 rows에 에러가 발생하면 err 객체에 정보가 나타난다.
 		var query = connection.query(sql, function(err, rows) {
 			if(err) {
 				console.log("query Error");
 				connection.release();
 				throw err;
 			}
-			res.redirect('./');
+			// 데이터 베이스 처리를 마치고 해당 웹페이지(http://localhost:3000/)
+			// 으로 이동한다.
+			res.redirect('http://localhost:3000/');
 			connection.release();
 		});
 	});

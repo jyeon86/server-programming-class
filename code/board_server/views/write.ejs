@@ -5,36 +5,35 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script>
       function onWriteSubmit() {
-        // validation 추가
-        var title = document.getElementById('titleInput').value;
-        var name = document.getElementById('nameInput').value;
-        var contents = document.getElementById('contentsInput').value;
-
-        if(title.length > 100) {
-          alert("제목은 100글자 이상 입력할 수 없습니다.");
-          return false;
-        }
-        if(title == "") {
-          alert("제목을 입력해야 합니다");
-          return false;
-        }
-        if(name.length > 20) {
-          alert("이름은 20글자 이상 입력할 수 없습니다.");
-          return false;
-        }
-        if(name == "") {
-          alert("이름을 입력해야 합니다");
-          return false;
-        }
-        if(contents.length > 1000) {
-          alert("내용은 1000글자 이상 입력할 수 없습니다.");
-          return false;
-        }
-        if(contents == "") {
-          alert("내용을 입력해야 합니다");
-          return false;
+        var title = document.getElementById('titleInput').value; 
+        var name = document.getElementById('nameInput').value; 
+        var contents = document.getElementById('contentsInput').value; 
+        if(title.length > 100) { 
+          alert("제목은 100글자 이상 입력할 수 없습니다."); 
+          return false; 
         } 
+        if(title == "") { 
+          alert("제목을 입력해야 합니다"); 
+          return false; 
+        } 
+        if(name.length > 20) { 
+          alert("이름은 20글자 이상 입력할 수 없습니다."); 
+          return false; 
+        } 
+        if(name == "") { 
+          alert("이름을 입력해야 합니다"); 
+          return false; 
+        } 
+        if(contents.length > 1000) { 
+          alert("내용은 1000글자 이상 입력할 수 없습니다."); 
+          return false; 
+        } 
+        if(contents == "") { 
+          alert("내용을 입력해야 합니다"); 
+          return false; 
+        }  
       }
+
     </script>
   </head>
   <body>
@@ -44,7 +43,7 @@
         <table border="1" width="100%">
           <tr>
               <td>제목</td>
-              <td><input type="text" name="titleInput" id="titleInput" placeholder="제목을 입력해주세요."s></td>
+              <td><input type="text" name="titleInput" id="titleInput" placeholder="제목을 입력해주세요."></td>
           </tr>
           <tr>
               <td>이름</td>
