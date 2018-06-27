@@ -24,29 +24,36 @@ var pool = mysql.createPool({
 // 3값이 변수 idx에 들어간다.
 router.get('/:idx', function(req, res, next) {
     var idx = req.params.idx; // 웹페이지 주소 정보가 req 객체에 들어가 있으므로 값을 가져옴
-    console.log('select * from my_board where _idx = '+idx);
+    
     // 데이터베이스를 활용하기 위해 풀에서 연결을 가져옴
     pool.getConnection(function(err, connection) {
         // 데이터 베이스에서 실행시킬 sql문(query)을 작성
-
-        var sql = "UPDATE my_board SET hit_count = hit_count + 1 WHERE _idx = " + idx;
-
-        var query2 = connection.query(sql, function(err, rows) {
+        var select_sql = "SELECT * FROM my_board WHERE _idx="+idx;
+        connection.query(select_sql, function(err, rows) {
             if(err) {// sql문 작성시 에러가 발생할 경우
                 connection.release();
                 throw err;
             }
 
-            var query = connection.query('select * from my_board where _idx = '+idx, function(err, rows) {
+            if(rows[0].category == "회원") {
+                if(!req.session.user) {
+                    res.redirect('http://localhost:3000/session/login');
+                    connection.release();
+                    return;
+                }
+            } 
+
+            var update_sql = "UPDATE my_board SET hit_count=hit_count+1 WHERE _idx="+idx;
+            connection.query(update_sql, function(err, rows2) {
                 if(err) {// sql문 작성시 에러가 발생할 경우
                     connection.release();
                     throw err;
                 }
-                //read.ejs를 클라이언트 화면에 표시할때 데이터베이스 검색 결과인 rows도 같이 전달한다.
                 res.render('read', { rows : rows });
-                connection.release();     
+                connection.release();
             });
         });
+
     });
 });
 
