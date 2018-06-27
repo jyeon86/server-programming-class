@@ -10,6 +10,19 @@
         <input type="button" value="일반" onclick="window.location.href='http://localhost:3000/show_normal'">
         <input type="button" value="회원" onclick="window.location.href='http://localhost:3000/show_member'">
       </div>
+      <div>
+        <%
+          if(is_logined) {          
+        %>
+          <input type="button" value="로그아웃" onclick="window.location.href='http://localhost:3000/session/logout'">
+        <%
+          } else {
+        %>
+          <input type="button" value="로그인" onclick="window.location.href='http://localhost:3000/session/login'">
+        <%
+          }
+        %>
+      </div>
       <table border='1'>
         <tr>
             <td>글번호</td>

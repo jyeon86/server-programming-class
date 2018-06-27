@@ -28,10 +28,15 @@ router.get('/', function(req, res, next) {
                 connection.release();
                 throw err;
             }
-            //index.ejs를 클라이언트 화면에 표시할때 데이터베이스 검색 결과인 rows도 같이 전달한다.
-            res.render('index', { rows : rows });
+            if(req.session.user) {
+                console.log('이미 로그인되어 게시판 페이지로 이동한다.');
+                res.render('index', { rows : rows, is_logined : true });
+                    
+            } else {
+                console.log('로그인 있지 않음.');
+                res.render('index', { rows : rows, is_logined : false });   
+            }
             connection.release();
-            
         });
     });
   
