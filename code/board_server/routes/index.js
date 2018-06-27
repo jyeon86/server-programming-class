@@ -37,4 +37,40 @@ router.get('/', function(req, res, next) {
   
 });
 
+router.get('/show_normal', function(req, res, next) {
+    // 데이터베이스를 활용하기 위해 풀에서 연결을 가져옴
+    pool.getConnection(function(err, connection) {
+        // 데이터 베이스에서 실행시킬 sql문(query)을 작성
+        var query = connection.query("SELECT * FROM my_board WHERE category = '일반'", function(err, rows) {
+            if(err) {// sql문 작성시 에러가 발생할 경우
+                connection.release();
+                throw err;
+            }
+            //index.ejs를 클라이언트 화면에 표시할때 데이터베이스 검색 결과인 rows도 같이 전달한다.
+            res.render('index', { type : "normal", rows : rows });
+            connection.release();
+            
+        });
+    });
+  
+});
+
+router.get('/show_member', function(req, res, next) {
+    // 데이터베이스를 활용하기 위해 풀에서 연결을 가져옴
+    pool.getConnection(function(err, connection) {
+        // 데이터 베이스에서 실행시킬 sql문(query)을 작성
+        var query = connection.query("SELECT * FROM my_board WHERE category = '회원'", function(err, rows) {
+            if(err) {// sql문 작성시 에러가 발생할 경우
+                connection.release();
+                throw err;
+            }
+            //index.ejs를 클라이언트 화면에 표시할때 데이터베이스 검색 결과인 rows도 같이 전달한다.
+            res.render('index', { type : "member", rows : rows });
+            connection.release();
+            
+        });
+    });
+  
+});
+
 module.exports = router;
