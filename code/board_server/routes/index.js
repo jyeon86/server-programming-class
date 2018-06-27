@@ -13,12 +13,7 @@ var pool = mysql.createPool({
     connectionLimit : 20,
     waitForConnections : false
 });
-/* GET home page. */
-// 미들웨어 부분
-// 주소를 localhost:3000/으로 접속한 경우, index.ejs파일을 웹브라우저에 출력해준다.
-// 이때 전달할 데이터를 담은 객체도 같이 보낸다,
-// title >> 키
-// 'Express' >> 값
+
 router.get('/', function(req, res, next) {
     // 데이터베이스를 활용하기 위해 풀에서 연결을 가져옴
     pool.getConnection(function(err, connection) {
@@ -28,8 +23,13 @@ router.get('/', function(req, res, next) {
                 connection.release();
                 throw err;
             }
-            //index.ejs를 클라이언트 화면에 표시할때 데이터베이스 검색 결과인 rows도 같이 전달한다.
-            res.render('index', { rows : rows });
+
+            if(req.session.user) {
+                res.render('index', { rows : rows, is_logined : true, login_id : "" });
+                    
+            } else {
+                res.render('index', { rows : rows, is_logined : false, login_id : "" });   
+            }
             connection.release();
             
         });
@@ -46,8 +46,14 @@ router.get('/show_normal', function(req, res, next) {
                 connection.release();
                 throw err;
             }
-            //index.ejs를 클라이언트 화면에 표시할때 데이터베이스 검색 결과인 rows도 같이 전달한다.
-            res.render('index', { type : "normal", rows : rows });
+            
+            if(req.session.user) {
+                res.render('index', { rows : rows, is_logined : true, login_id : "" });
+                    
+            } else {
+                res.render('index', { rows : rows, is_logined : false, login_id : "" });   
+            }
+
             connection.release();
             
         });
@@ -64,8 +70,14 @@ router.get('/show_member', function(req, res, next) {
                 connection.release();
                 throw err;
             }
-            //index.ejs를 클라이언트 화면에 표시할때 데이터베이스 검색 결과인 rows도 같이 전달한다.
-            res.render('index', { type : "member", rows : rows });
+            
+            if(req.session.user) {
+                res.render('index', { rows : rows, is_logined : true, login_id : "" });
+                    
+            } else {
+                res.render('index', { rows : rows, is_logined : false, login_id : "" });   
+            }
+
             connection.release();
             
         });

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="/stylesheets/join.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    
+    <div>
+        <div class="container">
+                <br>
+                <h1>JOIN</h1>
+                <br>
+                <hr>
+            <form action="/join" method="post" id="formTag">
+                <div class="form-group">
+                    <label for="usr">ID:</label>
+                    <input type="text" class="form-control" id="usr" name="username" onchange="checkValidId(this.value)">
+                </div>
+                <div class="information" id="infoID">
+                    아이디는 5~10글자이고, 아이디 첫 글자는 영문자이어야 합니다.
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Password:</label>
+                    <input type="password" class="form-control" id="pwd" name="password" onchange="checkValidPwd(this.value)">
+                </div>
+                <div class="information" id="infoPWD">
+                    비밀번호는 8~20글자이고, 영문자와 숫자가 1개 이상씩 포함되어야 합니다.
+                </div>
+                <div class="form-group">
+                    <label for="pwdConfirm">Password check:</label>
+                    <input type="password" class="form-control" id="pwdConfirm" name="passwordConfirm" onchange="checkValidPwdconfirm(this.value)">
+                </div>
+                <div class="information" id="infoPWDconfirm">
+                    비밀번호와 확인이 일치하지 않습니다
+                </div>
+                <h3>Gender</h3>
+                <div>
+                    <input type="radio" name="gender" id="male" value="male" checked>
+                    <label for="male">male</label>
+                    <input type="radio" name="gender" id="female" value="female">
+                    <label for="female">female</label>
+                </div>
+                <br>
+                <h3>BIRTHDAY</h3>
+                <div>
+                    <input type="text" class="form-control year" id="year" name="year" placeholder="year" onchange="checkValidBirth()">
+                    <select class="form-control month" name="month" id="month" onchange="checkValidBirth()">
+                        <option>month</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                    <input type="text" class="form-control day" id="day" name="day" placeholder="day" onchange="checkValidBirth()">
+                </div>
+                <div class="information" id="infobirth">
+                    태어난 년도를 정확히 입력하세요
+                </div>
+                <div class="information" id="infomonth">
+                    태어난 월을 정확히 선택하세요
+                </div>
+                <div class="information" id="infoday">
+                    태어난 일자를 정확히 입력하세요
+                </div>
+                <br>
+                <h3>PHONE NUMBER</h3>
+                <div>
+                    <select class="form-control country-code" id="countrycode" disabled>
+                        <option>+82</option>
+                    </select>
+                    <input type="text" class="form-control number" id="number" name="number" placeholder="Phone number" onchange="checkValidNumber(this.value)">
+                    <input type="button"  class="form-control certification" value="Admin">
+                </div>
+                <div class="information" id="infonumber">
+                    필수 정보입니다 
+                </div>
+               
+                <button type="submit"  class="btn btn-primary">Submit</button>
+                
+            </form>
+        </div>
+    <script src="/javascripts/join.js" type="text/javascript"></script>
+</body>
+</html>

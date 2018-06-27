@@ -5,6 +5,21 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+      <div align="right">
+        <%
+          if(is_logined) {          
+        %>
+          <span><%= login_id %> 님 반갑습니다.</span>
+          <input type="button" value="로그아웃" onclick="window.location.href='http://localhost:3000/session/logout'">
+        <%
+          } else {
+        %>
+          <input type="button" value="로그인" onclick="window.location.href='http://localhost:3000/session/login'">
+          <input type="button" value="회원가입" onclick="window.location.href='http://localhost:3000/join'">
+        <%
+          }
+        %>
+      </div>
       <div>
         <input type="button" value="전체" onclick="window.location.href='http://localhost:3000/'">
         <input type="button" value="일반" onclick="window.location.href='http://localhost:3000/show_normal'">

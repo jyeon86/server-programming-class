@@ -12,6 +12,7 @@ var writeRouter = require('./routes/write');
 var updateRouter = require('./routes/update');
 var searchRouter = require('./routes/search');
 var sessionRouter = require('./routes/session');
+var joinRouter = require('./routes/join');
 
 var app = express();
 
@@ -34,6 +35,7 @@ app.use('/write', writeRouter);
 app.use('/update', updateRouter);
 app.use('/search', searchRouter);
 app.use('/session', sessionRouter);
+app.use('/join', joinRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
