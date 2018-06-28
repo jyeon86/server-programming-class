@@ -41,7 +41,17 @@
           %>
           <tr>
               <td><%= rows[i]._idx %></td>
+              <%
+                if(rows[i].noti == 1) {
+              %>
+              <td><a href="./read/<%= rows[i]._idx %>"><b>[공지] </b><%= rows[i].title %></a></td>
+              <%
+                } else {
+              %>
               <td><a href="./read/<%= rows[i]._idx %>"><%= rows[i].title %></a></td>
+              <%
+                }
+              %>
               <td><%= rows[i].name %></td>
               <td><%= rows[i].hit_count %></td>
               <td><%= rows[i].best_count %></td>
