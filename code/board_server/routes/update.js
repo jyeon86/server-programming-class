@@ -43,17 +43,20 @@ router.post('/', function(req, res, next) {
 	var name = req.body.nameInput;
 	var contents = req.body.contentsInput;
 	var category = req.body.categoryInput;
-
+	var noti = req.body.noti_check;
+	if(typeof noti == 'undefined') noti = 0;
+	
 	pool.getConnection(function(err, connection) {
 		if(err) {
 			console.log("getConnection Error");
             throw err;
 		}
-		var sql = 'UPDATE my_board SET title = "' + title 
-		+ '", name = "' + name 
-		+ '", contents = "' + contents 
-		+ '", category = "' + category
-		+ '", update_at = now()'
+		var sql = "UPDATE my_board SET title = '" + title 
+		+ "', name = '" + name 
+		+ "', contents = '" + contents 
+		+ "', category = '" + category
+		+ "', update_at = now()"
+		+ ", noti = " + noti
 		+ ' WHERE _idx = ' + idx;
 
 		console.log(sql);
