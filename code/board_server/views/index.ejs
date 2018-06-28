@@ -33,6 +33,18 @@
           }
           %>
       </table>
+      <form method="post" action="/search">
+        <select name="searchTypeInput" id="searchTypeInput">
+          <option value="title" selected="selected">글제목</option>
+          <option value="writer">글쓴이</option>
+          <option value="number">글번호</option>
+        </select>
+
+        <input type="text" name="keywordInput" id="keywordInput" placeholder="검색 내용을 입력하세요.">
+
+        <input type="submit" value="검색하기">
+      </form>
+      
       <input type="button" value="글쓰기" onclick="window.location.href='http://localhost:3000/write'">
   </body>
 </html>

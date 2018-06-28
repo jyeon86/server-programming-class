@@ -14,16 +14,12 @@ var pool = mysql.createPool({
     waitForConnections : false
 });
 
-/* GET home page. */
-// 미들웨어 부분
-// 주소를 localhost:3000/으로 접속한 경우, index.ejs파일을 웹브라우저에 출력해준다.
-// 이때 전달할 데이터를 담은 객체도 같이 보낸다,
-// title >> 키
-// 'Express' >> 값
+// 게시판 웹페이지를 표시해주는 미들웨어
 router.get('/:idx', function(req, res, next) {
 	var idx = req.params.idx;
 
 	pool.getConnection(function(err, connection) {
+		// 게시판 웹페이지에 표시할 데이터베이스를 읽어오는 sql
 		var sql = "SELECT * FROM my_board WHERE _idx = " + idx;
 
 		var query = connection.query(sql, function(err, rows) {
@@ -31,12 +27,14 @@ router.get('/:idx', function(req, res, next) {
 				connection.release();
 				throw err;
 			}
-			res.render('update.ejs', { rows : rows});
+			res.render('update.ejs', { rows : rows });
 			connection.release();
 		});
 	});
 });
 
+//전달 받은 데이터를 데이터베이스에 업데이트 해주는 미들웨어
+//글을 수정해주는 역활을 하는 미들웨어
 router.post('/', function(req, res, next) {
 	var idx = req.body.idx;
 	var title = req.body.titleInput;
@@ -44,28 +42,32 @@ router.post('/', function(req, res, next) {
 	var contents = req.body.contentsInput;
 	var category = req.body.categoryInput;
 
+	// 데이터 베이스를 동작하기 위해 서버와 데이터베이스를 연결함
 	pool.getConnection(function(err, connection) {
 		if(err) {
 			console.log("getConnection Error");
             throw err;
 		}
-		var sql = 'UPDATE my_board SET title = "' + title 
-		+ '", name = "' + name 
-		+ '", contents = "' + contents 
-		+ '", category = "' + category
-		+ '", update_at = now()'
-		+ ' WHERE _idx = ' + idx;
+		// 데이터베이스에 연결할 sql문을 작성
+		var sql = "UPDATE my_board SET title = '" + title 
+		+ "', name = '" + name 
+		+ "', contents = '" + contents 
+		+ "', category = '" + category
+		+ "', update_at = now()"
+		+ " WHERE _idx = " + idx;
 
 		console.log(sql);
+		//데이터베이스에 sql문을 실행한다.
 		var query = connection.query(sql, function(err, rows) {
 			if(err) {
 				console.log("query Error");
 				connection.release();
 				throw err;
 			}
+			// 실행후에는 게시판 목록으로 이동한다.
 			res.redirect('/');
 			connection.release();
-		})
+		});
 	});
 })
 
