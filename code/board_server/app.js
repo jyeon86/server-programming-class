@@ -13,6 +13,7 @@ var updateRouter = require('./routes/update');
 var searchRouter = require('./routes/search');
 var cookieRouter = require('./routes/cookie');
 var sessionRouter = require('./routes/session');
+var uploadRouter = require('./routes/upload');
 var app = express();
 
 // view engine setup
@@ -34,6 +35,7 @@ app.use('/update', updateRouter);
 app.use('/search', searchRouter);
 app.use('/cookie', cookieRouter);
 app.use('/session', sessionRouter);
+app.use('/upload', uploadRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
