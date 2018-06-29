@@ -39,7 +39,7 @@
   </head>
   <body>
       <h1>글쓰기</h1>
-      <form method="post" action="./" onsubmit="return onWriteSubmit()">
+      <form method="post" action="http://localhost:3000/update" onsubmit="return onWriteSubmit()">
       
         <table border="1" width="100%">
         
@@ -70,10 +70,12 @@
                   } else {
                 %>
                 <input type="checkbox" name="noti_check" id="noti_check" value="1"><label for="noti_check">공지글</label>
-                
                 <%
                   }
                 %>
+                <!--
+                  end of 공지 여부 선택
+                -->
               </td>
           </tr>
             <tr>

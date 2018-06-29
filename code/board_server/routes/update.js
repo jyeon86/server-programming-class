@@ -20,8 +20,8 @@ var pool = mysql.createPool({
 // 이때 전달할 데이터를 담은 객체도 같이 보낸다,
 // title >> 키
 // 'Express' >> 값
-router.get('/:idx', function(req, res, next) {
-	var idx = req.params.idx;
+router.get('/:hihi', function(req, res, next) {
+	var idx = req.params.hihi;
 
 	pool.getConnection(function(err, connection) {
 		var sql = "SELECT * FROM my_board WHERE _idx = " + idx;
@@ -43,19 +43,27 @@ router.post('/', function(req, res, next) {
 	var name = req.body.nameInput;
 	var contents = req.body.contentsInput;
 	var category = req.body.categoryInput;
+	/*
+	공지글 체크 수정
+	*/
 	var noti = req.body.noti_check;
 	if(typeof noti == 'undefined') noti = 0;
-	
+	// if(noti == 'undefined') noti = 0;
+	/*
+	end of 공지글 체크 수정
+	*/
 	pool.getConnection(function(err, connection) {
 		if(err) {
 			console.log("getConnection Error");
             throw err;
 		}
+
 		var sql = "UPDATE my_board SET title = '" + title 
 		+ "', name = '" + name 
 		+ "', contents = '" + contents 
 		+ "', category = '" + category
 		+ "', update_at = now()"
+		// 공지글 체크 관련 기능을 추가한 sql 쿼리문
 		+ ", noti = " + noti
 		+ ' WHERE _idx = ' + idx;
 

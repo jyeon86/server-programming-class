@@ -22,6 +22,26 @@ var pool = mysql.createPool({
 // 'Express' >> 값
 // localhost:3000/read/3
 // 3값이 변수 idx에 들어간다.
+router.post('/del', function(req, res, next) {
+    var idx = req.body.number;
+    pool.getConnection(function(err, connection) {
+        // 데이터 베이스에서 실행시킬 sql문(query)을 작성
+        /*
+        var sql = "DELETE FROM my_board WHERE _idx="+idx;
+        */
+        var sql = "UPDATE my_board SET enable=0 WHERE _idx="+idx;
+        console.log(sql);
+        
+        var query = connection.query(sql, function(err, rows) {
+            if(err) {// sql문 작성시 에러가 발생할 경우
+                connection.release();
+                throw err;
+            }
+            res.redirect("http://localhost:3000/");
+            connection.release();
+        });
+    });
+});
 router.get('/:idx', function(req, res, next) {
     var idx = req.params.idx; // 웹페이지 주소 정보가 req 객체에 들어가 있으므로 값을 가져옴
     
