@@ -3,6 +3,16 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 var db_info = require('./db_info');
+var multer = require('multer'); // multer모듈 적용 (for 파일업로드) 
+var storage = multer.diskStorage({ 
+  destination: function (req, file, cb) { 
+    cb(null, './uploads/') // cb 콜백함수를 통해 전송된 파일 저장 디렉토리 설정 
+  }, 
+  filename: function (req, file, cb) { 
+    cb(null, file.originalname) // cb 콜백함수를 통해 전송된 파일 이름 설정 
+  } 
+});
+var upload = multer({ storage: storage });
 
 var pool = mysql.createPool({
     host : db_info.getHost(),
@@ -25,7 +35,7 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.post('/', function(req, res, next) {
+router.post('/', upload.single("myFile"), function(req, res, next) {
 	// 클라이언트로 부터 전달 받은 데이터들(데이터베이스로 넣을 데이터들)
 	var title = req.body.titleInput;
 	var name = req.body.nameInput;

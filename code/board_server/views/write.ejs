@@ -38,7 +38,7 @@
   </head>
   <body>
       <h1>글쓰기</h1>
-      <form method="post" action="./write" onsubmit="return onWriteSubmit()">
+      <form method="post" action="./write" enctype="multipart/form-data" onsubmit="return onWriteSubmit()">
       
         <table border="1" width="100%">
           <tr>
@@ -71,6 +71,9 @@
             <tr>
               <td>내용</td>
               <td><textarea name="contentsInput" id="contentsInput" rows="5" cals="40" placeholder="내용을 입력해주세요."></textarea></td>
+          </tr>
+          <tr>
+            <td colspan="2"><input type="file" name="myFile"> 
           </tr>
           <tr>
             <td colspan="2"><input type="submit" value="글 등록하기"></td>
