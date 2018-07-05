@@ -25,8 +25,7 @@ router.get('/', function(req, res, next) {
             }
 
             if(req.session.user) {
-                res.render('index', 
-                    { rows : rows, is_logined : true, login_id : req.session.user.id });
+                res.render('index', { rows : rows });
                     
             } else {
                 res.render('index', { rows : rows, is_logined : false, login_id : "" });   
