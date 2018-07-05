@@ -37,7 +37,7 @@ app.use('/update', updateRouter);
 app.use('/search', searchRouter);
 app.use('/session', sessionRouter);
 app.use('/join', joinRouter);
-\app.use('/delete', deleteRouter);
+app.use('/delete', deleteRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
