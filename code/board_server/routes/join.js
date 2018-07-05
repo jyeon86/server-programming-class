@@ -44,7 +44,7 @@ router.post('/', function(req, res, next) {
 		var sql = "INSERT INTO user_info " + 
 			" (id, password, gender, birth, phone_number, " +
 			" create_at, update_at) VALUES" +
-			"('"+id+"', '"+password+"', '"+gender+"', " +
+			"('"+id+"', PASSWORD('"+password+"'), '"+gender+"', " +
 			"'"+year+"-"+month+"-"+day+"', '"+phone_number+"'," +
 			"now(), now())"; 
 
