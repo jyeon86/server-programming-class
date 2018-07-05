@@ -9,7 +9,8 @@ var usersRouter = require('./routes/users');
 var readRouter = require('./routes/read');
 var writeRouter = require('./routes/write');
 var updateRouter = require('./routes/update');
-var searchRouter = require('./routes/search'); 
+var searchRouter = require('./routes/search');
+var deleteRouter = require('./routes/delete'); 
 var app = express();
 
 // view engine setup
@@ -28,6 +29,7 @@ app.use('/read', readRouter);
 app.use('/write', writeRouter);
 app.use('/update', updateRouter);
 app.use('/search', searchRouter);
+app.use('/delete', deleteRouter); 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

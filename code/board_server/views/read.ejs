@@ -57,6 +57,13 @@
               사이트 주소에 글 번호 데이터(_idx)를 포함해서 전달하는 get 방식 예시
               -->
               <input type="button" value="수정하기" onclick="window.location.href='http://localhost:3000/update/<%= rows[0]._idx %>'">
+              <!--
+                삭제 기능을 위한 버튼
+              -->
+              <input type="button" value="삭제하기" onclick="window.location.href='http://localhost:3000/delete/<%= rows[0]._idx %>'">
+              <!--
+                end of 삭제 기능을 위한 버튼
+              -->
             </td>
         </tr>
       </table>

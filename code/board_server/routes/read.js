@@ -50,6 +50,26 @@ router.get('/:idx', function(req, res, next) {
     });
 });
 
+router.post('/del', function(req, res, next) {
+    var idx = req.body.number;
+    pool.getConnection(function(err, connection) {
+ 
+        var sql = "UPDATE my_board SET enable=0 WHERE _idx="+idx;
+ 
+        console.log(sql);
+ 
+        var query = connection.query(sql, function(err, rows) {
+            if(err) {// sql문 작성시 에러가 발생할 경우
+                connection.release();
+                throw err;
+            }
+            res.redirect("http://localhost:3000/");
+            connection.release();
+        });
+    });
+});
+ 
+
 router.post('/', function(req, res, next) {
     console.dir(req.body);
     var idx = req.body.idx;
