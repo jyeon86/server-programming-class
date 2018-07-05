@@ -5,11 +5,19 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <div> 
-      <input type="button" value="전체" onclick="window.location.href='http://localhost:3000/'"> 
-      <input type="button" value="일반" onclick="window.location.href='http://localhost:3000/show_normal'"> 
-      <input type="button" value="회원" onclick="window.location.href='http://localhost:3000/show_member'"> 
-    </div> 
+    <!-- 로그인 회원가입 로그아웃 아이디 표시 부분 -->
+      <div align="right">
+       
+          <input type="button" value="로그인" onclick="window.location.href='http://localhost:3000/session/login'">
+          <input type="button" value="회원가입" onclick="window.location.href='http://localhost:3000/join'">
+      </div>
+    <!-- end of 로그인 회원가입 로그아웃 아이디 표시 부분 -->
+
+      <div>
+        <input type="button" value="전체" onclick="window.location.href='http://localhost:3000/'">
+        <input type="button" value="일반" onclick="window.location.href='http://localhost:3000/show_normal'">
+        <input type="button" value="회원" onclick="window.location.href='http://localhost:3000/show_member'">
+      </div>
       <table border='1'>
         <tr>
             <td>글번호</td>
@@ -24,19 +32,20 @@
           <%
             for(var i = 0; i < rows.length; i++) {
           %>
+          
           <tr>
               <td><%= rows[i]._idx %></td>
-              <% 
-                if(rows[i].noti == 1) { 
-              %> 
-              <td><a href="./read/<%= rows[i]._idx %>"><b>[공지] </b><%= rows[i].title %></a></td> 
-              <% 
-                } else { 
-              %> 
-              <td><a href="./read/<%= rows[i]._idx %>"><%= rows[i].title %></a></td> 
-              <% 
-                } 
-              %> 
+              <%
+                if(rows[i].noti == 1) {
+              %>
+              <td><a href="./read/<%= rows[i]._idx %>"><b>[공지] </b><%= rows[i].title %></a></td>
+              <%
+                } else {
+              %>
+              <td><a href="./read/<%= rows[i]._idx %>"><%= rows[i].title %></a></td>
+              <%
+                }
+              %>
               <td><%= rows[i].name %></td>
               <td><%= rows[i].hit_count %></td>
               <td><%= rows[i].best_count %></td>
@@ -59,7 +68,11 @@
 
         <input type="submit" value="검색하기">
       </form>
-      
+
+      <br/>
       <input type="button" value="글쓰기" onclick="window.location.href='http://localhost:3000/write'">
+
+      
+
   </body>
 </html>

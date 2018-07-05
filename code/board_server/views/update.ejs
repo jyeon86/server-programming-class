@@ -58,21 +58,24 @@
                   <option value="일반" selected="selected">일반</option>
                   <option value="회원">회원</option>
                 </select>
-                <!-- 
-                  공지 여부 선택 
-                --> 
-                <% 
-                  if(rows[0].noti == 1) { 
-                %> 
-                <input type="checkbox" name="noti_check" id="noti_check" value="1" checked="checked"><label for="noti_check">공지글</label> 
-                <% 
-                  } else { 
-                %> 
-                <input type="checkbox" name="noti_check" id="noti_check" value="1"><label for="noti_check">공지글</label> 
-                 
-                <% 
-                  } 
-                %> 
+
+                <!--
+                  공지 여부 선택
+                -->
+                <%
+                  if(rows[0].noti == 1) {
+                %>
+                <input type="checkbox" name="noti_check" id="noti_check" value="1" checked="checked"><label for="noti_check">공지글</label>
+                <%
+                  } else {
+                %>
+                <input type="checkbox" name="noti_check" id="noti_check" value="1"><label for="noti_check">공지글</label>
+                <%
+                  }
+                %>
+                <!--
+                  end of 공지 여부 선택
+                -->
               </td>
           </tr>
             <tr>

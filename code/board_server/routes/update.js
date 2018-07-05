@@ -41,25 +41,29 @@ router.post('/', function(req, res, next) {
 	var name = req.body.nameInput;
 	var contents = req.body.contentsInput;
 	var category = req.body.categoryInput;
+	/*
+	공지글 체크 수정
+	*/
 	var noti = req.body.noti_check;
- 
-  	if(typeof noti == 'undefined') noti = 0;
- 
-	// 데이터 베이스를 동작하기 위해 서버와 데이터베이스를 연결함
+	if(typeof noti == 'undefined') noti = 0;
+	// if(noti == 'undefined') noti = 0;
+	/*
+	end of 공지글 체크 수정
+	*/
 	pool.getConnection(function(err, connection) {
 		if(err) {
 			console.log("getConnection Error");
             throw err;
 		}
-		// 데이터베이스에 연결할 sql문을 작성
+
 		var sql = "UPDATE my_board SET title = '" + title 
- 					+ "', name = '" + name 
- 					+ "', contents = '" + contents 
-					+ "', category = '" + category
- 					+ "', update_at = now()"
- 					+ ", noti = " + noti
- 					+ ' WHERE _idx = ' + idx;
- 
+		+ "', name = '" + name 
+		+ "', contents = '" + contents 
+		+ "', category = '" + category
+		+ "', update_at = now()"
+		// 공지글 체크 관련 기능을 추가한 sql 쿼리문
+		+ ", noti = " + noti
+		+ ' WHERE _idx = ' + idx;
 
 		console.log(sql);
 		//데이터베이스에 sql문을 실행한다.
