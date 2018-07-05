@@ -7,9 +7,19 @@
   <body>
     <!-- 로그인 회원가입 로그아웃 아이디 표시 부분 -->
       <div align="right">
-       
+        <%
+          if(is_logined) {          
+        %>
+          <span><%= login_id %> 님 반갑습니다.</span>
+          <input type="button" value="로그아웃" onclick="window.location.href='http://localhost:3000/session/logout'">
+        <%
+          } else {
+        %>
           <input type="button" value="로그인" onclick="window.location.href='http://localhost:3000/session/login'">
           <input type="button" value="회원가입" onclick="window.location.href='http://localhost:3000/join'">
+        <%
+          }
+        %>
       </div>
     <!-- end of 로그인 회원가입 로그아웃 아이디 표시 부분 -->
 

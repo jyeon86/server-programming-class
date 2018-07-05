@@ -65,6 +65,8 @@ router.post('/login', function(req, res, next) {
 				connection.release();
 			});
 		});
+	} else {
+		res.redirect('http://localhost:3000/');
 	}
 });
 

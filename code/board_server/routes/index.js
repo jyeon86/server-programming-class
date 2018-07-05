@@ -25,7 +25,8 @@ router.get('/', function(req, res, next) {
             }
 
             if(req.session.user) {
-                res.render('index', { rows : rows });
+                res.render('index', { rows : rows, is_logined : true, 
+                    login_id : req.session.user.user_id });
                     
             } else {
                 res.render('index', { rows : rows, is_logined : false, login_id : "" });   
@@ -48,7 +49,7 @@ router.get('/show_normal', function(req, res, next) {
             }
             
             if(req.session.user) {
-                res.render('index', { rows : rows, is_logined : true, login_id : "" });
+                res.render('index', { rows : rows, is_logined : true, login_id : req.session.user.user_id });
                     
             } else {
                 res.render('index', { rows : rows, is_logined : false, login_id : "" });   
@@ -72,7 +73,7 @@ router.get('/show_member', function(req, res, next) {
             }
             
             if(req.session.user) {
-                res.render('index', { rows : rows, is_logined : true, login_id : "" });
+                res.render('index', { rows : rows, is_logined : true, login_id : req.session.user.user_id });
                     
             } else {
                 res.render('index', { rows : rows, is_logined : false, login_id : "" });   
