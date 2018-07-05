@@ -61,7 +61,18 @@
                 <!-- 
                   공지 여부 선택 
                 --> 
-                <input type="checkbox" name="noti_check" id="noti_check" value="1"><label for="noti_check">공지글</label>
+                <% 
+                  if(rows[0].noti == 1) { 
+                %> 
+                <input type="checkbox" name="noti_check" id="noti_check" value="1" checked="checked"><label for="noti_check">공지글</label> 
+                <% 
+                  } else { 
+                %> 
+                <input type="checkbox" name="noti_check" id="noti_check" value="1"><label for="noti_check">공지글</label> 
+                 
+                <% 
+                  } 
+                %> 
               </td>
           </tr>
             <tr>
