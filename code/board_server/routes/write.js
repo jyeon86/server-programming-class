@@ -31,6 +31,8 @@ router.post('/', function(req, res, next) {
 	var name = req.body.nameInput;
 	var contents = req.body.contentsInput;
 	var category = req.body.categoryInput;
+	var noti = req.body.noti;
+ 
 	console.log(title, name, contents, category);
 	// 데이터 베이스와 서버가 연결되기 시작
 	pool.getConnection(function(err, connection) {
@@ -41,9 +43,10 @@ router.post('/', function(req, res, next) {
 		}
 		// sql문을 작성한다.(데이터베이스에 넣을 데이터와 sql문을 조합한 형태이다.)
 		var sql = "INSERT INTO my_board (title, name, category,"+
-		" contents, update_at, create_at) VALUES "+
-		"('"+title+"', '"+name+"', '"+category+"', '"+contents+"', "+
-		"now(), now())";
+ 				" contents, update_at, create_at, noti) VALUES "+
+ 				"('"+title+"', '"+name+"', '"+category+"', '"+contents+"', "+
+				"now(), now(), '"+noti+"')";
+ 
 
 		console.log(sql);
 		// 데이터베이스 연결을 통해서 sql문을 실행한다.
