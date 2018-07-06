@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!--익스플로어 최신버전으로 랜더링-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--기종에 따른 넓이고정-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
+    <title> 청남대</title>
+
+    <!--  안드로이드(Android) -->
+    <link rel="shortcut icon" href="/images/icon32x32.png" />
+    <!-- iPhone icon(Retina) -->
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icon114x114.png" />
+
+    <!--css normalize CDN-->
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+ 
+    <!--  style -->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/sidebar.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+
+    <!--jquery library CDN-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/javascripts/sidebar.min.js"></script>
+    <script type="text/javascript" src="/javascripts/common.js"></script>
+
+    <!-- swiper plugin CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.0/css/swiper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.0/js/swiper.min.js"></script>
+    <style type="text/css">
+    
+
+    </style>
+</head>
+
+<body id="body">
+    <div class="page2 wrap pusher">
+       <div class="container">
+           <header class="header">
+            <h1>청남대 지도보기</h1>
+            <button type="button" class="icon back">
+                <span>뒤로가기</span>
+            </button>
+            <button type="button" class="icon menu">
+                <span>메뉴</span>
+            </button>
+           </header>
+           <main class="contents">
+                 <!-- Swiper -->
+                <div class="swiper-container tabMenu">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide" data-img="img_01_01.jpg">대통령기념관</div>
+                  <div class="swiper-slide" data-img="img_01_02.jpg">하늘정원</div>
+                  <div class="swiper-slide" data-img="img_01_03.jpg">국화축제</div>
+                  <div class="swiper-slide" data-img="img_01_01.jpg">청남대본관</div>
+                  <div class="swiper-slide" data-img="img_01_02.jpg">전망대</div>
+                  <div class="swiper-slide" data-img="img_01_03.jpg">대통령광장</div>
+                  <div class="swiper-slide" data-img="img_01_01.jpg">돌탑</div>
+                  <div class="swiper-slide" data-img="img_01_02.jpg">음악분수대</div>
+                  <div class="swiper-slide" data-img="img_01_03.jpg">영춘재</div>
+                </div>
+              </div>
+              <div class="mapAPI">
+                <div id="map" style="width:100%;height:100%;"></div>
+                <!-- api 소스 넣기 -->
+              </div>
+              <div class="linkDetail">
+                <div class="img"><img src="images/img_01_01.jpg" alt=""></div>
+                <div class="tit">대통령기념관</div>
+                <a href="/page1#slide3" class="btn">상세보기</a>
+                <a href="#" class="icon close"><span>닫기</span></a>
+              </div>
+              
+               <!-- Initialize Swiper -->
+              <script>
+                var tabMenu = new Swiper('.tabMenu', {
+                  spaceBetween: 30,
+                  centeredSlides: false,
+                  slidesPerView: 'auto',
+                  touchRatio: 0.2,
+                  slideToClickedSlide: true,
+                  normalizeSlideIndex: false,
+                  slidesOffsetBefore: 50,
+                  slidesOffsetAfter: 50,
+                });
+                tabMenu.on('tap', function () {
+                  var $activeSlide = $('.tabMenu .swiper-slide').eq(this.activeIndex);
+              
+                  // tabMenu 활성화된 .wiper-slide에 active 클래스 추가/이전 active 삭제
+                  $('.tabMenu .active').removeClass("active");
+                  $activeSlide.addClass("active");
+
+                  panTo(this.activeIndex);
+
+                  var title = $activeSlide.text(); 
+                  var link = "page1.html#slide"+(this.activeIndex+1);
+                  var imgSrc = "images/"+$activeSlide.attr("data-img");
+                  $(".linkDetail img").attr("src",imgSrc);
+                  $(".linkDetail .tit").text(title);
+                  $(".linkDetail .btn").attr("href",link);
+
+                  // .linkDetail 요소를 보이게 함.
+                  $(".linkDetail").css("bottom","0");
+
+                });
+                $(".linkDetail .close").on("click",function(){
+                  $(".linkDetail").css("bottom","-120px");
+                })
+              </script> 
+              <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4335a811ace0024d70e40db9ec61a441"></script>
+              <script>
+                var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+                    mapOption = { 
+                        center: new daum.maps.LatLng(36.4623822, 127.4730684), // 지도의 중심좌표
+                        level: 2 // 지도의 확대 레벨
+                    };
+
+                var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+                 
+                // 마커를 표시할 위치와 title 객체 배열입니다 
+                var positions = [
+                    {
+                        title: '대통령기념관', 
+                        latlng: new daum.maps.LatLng(36.4623822, 127.4730684)
+                    },
+                    {
+                        title: '하늘정원', 
+                        latlng: new daum.maps.LatLng(36.4630919, 127.4742286)
+                    },
+                    {
+                        title: '국화축제', 
+                        latlng: new daum.maps.LatLng(36.4623822, 127.4730684)
+                    },
+                    {
+                        title: '청남대본관',
+                        latlng: new daum.maps.LatLng(36.4598479, 127.4709495)
+                    },
+                    {
+                        title: '전망대',
+                        latlng: new daum.maps.LatLng(36.4599278, 127.4862119)
+                    },
+                    {
+                        title: '대통령광장',
+                        latlng: new daum.maps.LatLng(36.4574269, 127.4755419)
+                    },
+                    {
+                        title: '돌탑',
+                        latlng: new daum.maps.LatLng(36.462184, 127.4724505)
+                    },
+                    {
+                        title: '음악분수대',
+                        latlng: new daum.maps.LatLng(36.4623822, 127.4730684)
+                    },
+                    {
+                        title: '영춘재',
+                        latlng: new daum.maps.LatLng(36.4623822, 127.4730664)
+                    }
+                    
+
+                ];
+
+                // 마커 이미지의 이미지 주소입니다
+                var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+                    
+                for (var i = 0; i < positions.length; i ++) {
+                    
+                    // 마커 이미지의 이미지 크기 입니다
+                    var imageSize = new daum.maps.Size(24, 35); 
+                    
+                    // 마커 이미지를 생성합니다    
+                    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize); 
+                    
+                    // 마커를 생성합니다
+                    var marker = new daum.maps.Marker({
+                        map: map, // 마커를 표시할 지도
+                        position: positions[i].latlng, // 마커를 표시할 위치
+                        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                        image : markerImage // 마커 이미지 
+                    });
+                }
+
+                var map = new daum.maps.Map(container, options);
+                function panTo(idx) {
+                  // 이동할 위도 경도 위치를 생성합니다 
+                    switch(idx) {
+                      case 0: // 대통령 기념관 
+                        var moveLatLon = new daum.maps.LatLng(36.4623822, 127.4730684)
+                        break;
+                      case 1: // 하늘정원
+                        var moveLatLon = new daum.maps.LatLng(36.4630919, 127.4742286)
+                        break;
+                      case 2: // 국화축제
+                        var moveLatLon = new daum.maps.LatLng(36.4623822, 127.4730684)
+                        break;
+                      case 3: // 청남대본관
+                        var moveLatLon = new daum.maps.LatLng(36.4598479, 127.4709495)
+                        break;
+                      case 4: // 전망대
+                        var moveLatLon = new daum.maps.LatLng(36.4599278, 127.4862119)
+                        break;
+                      case 5: // 대통령광장
+                        var moveLatLon = new daum.maps.LatLng(36.4574269, 127.4755419)
+                        break;
+                      case 6: // 돌탑
+                        var moveLatLon = new daum.maps.LatLng(36.462184, 127.4724505)
+                        break;
+                      case 7: // 음악분수대
+                        var moveLatLon = new daum.maps.LatLng(36.4623822, 127.4730684)
+                        break;
+                      case 8: // 영춘재
+                        var moveLatLon = new daum.maps.LatLng(36.4623822, 127.4730664)
+                        break;
+                          
+                    }
+                    
+                   
+                    
+                    // 지도 중심을 부드럽게 이동시킵니다
+                    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+                    map.panTo(moveLatLon);            
+                }       
+              </script>
+           </main>
+       </div>
+    </div>
+  
+    
+</body>
+
+</html>

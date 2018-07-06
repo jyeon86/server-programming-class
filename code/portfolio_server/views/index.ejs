@@ -1,11 +1,67 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+
+<head>
+    <meta charset="utf-8">
+    <!--익스플로어 최신버전으로 랜더링-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--기종에 따른 넓이고정-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
+    <title> 청남대</title>
+
+    <!--  안드로이드(Android) -->
+    <link rel="shortcut icon" href="/images/icon32x32.png" />
+    <!-- iPhone icon(Retina) -->
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icon114x114.png" />
+
+    <!--css normalize CDN-->
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+ 
+    <!--  style -->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/sidebar.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+
+    <!--jquery library CDN-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/javascripts/sidebar.min.js"></script>
+    <script type="text/javascript" src="/javascripts/common.js"></script>
+</head>
+
+<body id="body">
+    <div class="home wrap pusher">
+       <div class="container">
+           <header class="header"> 
+            <button type="button" class="icon menu">
+                <span>메뉴</span>
+            </button>
+           </header>
+           <main class="contents">
+            <h1 class="title">청남대 <span class="pointTxt">소개</span></h1>
+            <div class="cont">
+                <p class="tit pointTxt">충청북도 청주시 상당구 문의면에 위치한 대통령 전용별장.</p>
+
+                <p>1980년 대청댐 준공식에 참석 후 전두환 대통령 시절 중부권에 별장의 필요성이 논의되었고 주변 경관과 지리적 요건이 잘 맞아 경호실장에 의해 1983년 6월 착공, 6개월만인 12월에 완공되었다.</p>
+
+                <p>“청남대”는 충청북도 청주시 대청댐 부근 1,844,843㎡ 의 면적에 지어진 대통령 전용별장으로 ‘따뜻한 남쪽의 청와대’라는 의미이며 '83년 조성당시에는 봄을 맞이하듯 손님을 맞이한다는 의미의 영빈관 개념으로 '영춘재'란 이름으로 준공되었다. 이후 '86년도 7월 전두환대통령에 의해 청남대로 개칭된 것이다.</p>
+
+                <p>역대 대통령들은 여름휴가와 명절휴가를 비롯하여 매년 4~5회, 많게는 7~8회씩 이용하여 20여년간 총 89회 472일을 이곳에서 보냈다. 대통령 별장은 이승만 대통령 시절부터 김해를 비롯해 4군데가 있었으나, 김영삼 대통령 시절 모두 폐쇄하고 청남대 한 곳만 남겼다.</p>
+
+                <p>청남대는 휴양 중에도 항상 국정을 수행할 수 있는 완벽한 시설을 갖춤은 물론 대청호 상수원 보호를 위해 최고의 수질정화시스템을 구축, 운영하였다.</p>
+
+                <p>또한, 청남대는 국가 1급 경호시설로 청와대에서 관리하고 4중의 경계철책과 경호실338경비대가 경비를 수행하다, 2003. 4. 18 노무현 대통령에 의해 관리권이 충청북도로 이양되고 일반인에게 개방되었다.</p>
+
+                <p>급변하는 국내외 정세 속에 대통령에게는 커다란 결단이 요구될 때가 많았다. 역대 대통령들은 국정운영의 중대한 고비에서 청남대에 머물며 정국에 대한 구상을 하였고, 이때 내린 결단들은 역사를 뒤바꿔왔다. 이것이 바로『청남대 구상』이다. 그 밖에 청남대에서 국빈을 맞이하기도 했다.</p>
+            </div>
+            <div class="links">
+                <a href="/page1" class="btn">청남대 둘러보기</a>
+                <a href="/page2" class="btn">청남대 지도보기</a>
+                <a href="/page3" class="btn">주변관광</a>
+                <a href="/page4" class="btn">이용안내</a>
+            </div>
+           </main>
+       </div>
+    </div>
+    
+</body>
+
 </html>
