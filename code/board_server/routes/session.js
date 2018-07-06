@@ -66,23 +66,30 @@ router.post('/login', function(req, res, next) {
 			});
 		});
 	}
-	// 이미 로그인된 경우는 게시판 페이지로 이동한다.
+	// 이미 로그인된 경우는 게시판 페이지로 이동한다
 	else {
 		res.redirect('http://localhost:3000/');
 	}
 });
 
+// 로그 아웃을 할 때 실행되는 미들웨어
+// http://localhost:3000/session/logout
 router.get('/logout', function(req, res, next) {
+	// 이미 로그인이 되어 있는지 확인한다.
+	// 세션에 데이터(req.session.user)가 저장되어 있으면 if문 아래부분이 실행된다
 	if(req.session.user) {
 		console.log("로그아웃 한다.");
-
+		// 세션을 제거(로그인한 사용자 정보를 삭제)하는 함수
 		req.session.destroy(function(err) {
 			if(err) { throw err; }
 			console.log('세션을 삭제하고 로그아웃 되었음');
 		});
-	} else {
+	} 
+	// 로그인이 되어 있지 않을 때
+	else {
 		console.log("로그인이 되어 있지 않음");
 	}
+	// 처리 후에는 게시판에 메인 화면으로 이동한다.
 	res.redirect('http://localhost:3000');
 });
 
