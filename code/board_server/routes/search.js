@@ -45,7 +45,14 @@ router.post('/', function(req, res, next) {
                 throw err;
             }
             console.dir(rows);
-            res.render('index.ejs',  { rows : rows });
+            if(req.session.user) {
+                res.render('index', { rows : rows, is_logined : true, 
+                    login_id : req.session.user.user_id });
+                    
+            } else {
+                res.render('index', { rows : rows, is_logined : false, login_id : "" });   
+            }
+            
             connection.release();
         });
 

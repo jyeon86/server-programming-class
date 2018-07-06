@@ -3,9 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-/* session part*/
 var session = require('express-session');
-/* end of session part*/
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var readRouter = require('./routes/read');
@@ -27,10 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-/* session part */
-app.use(session({ secret : 'my key', resave : true,
- saveUninitialized : true}));
-/* end of session part */
+app.use(session({ secret : 'my key', resave : true, saveUninitialized : true}));
 app.use('/userdata', express.static('uploads'));
 
 app.use('/', indexRouter);
@@ -40,9 +36,7 @@ app.use('/write', writeRouter);
 app.use('/update', updateRouter);
 app.use('/search', searchRouter);
 app.use('/session', sessionRouter);
-/* 주소 등록*/
 app.use('/join', joinRouter);
-/* */
 app.use('/delete', deleteRouter);
 
 // catch 404 and forward to error handler

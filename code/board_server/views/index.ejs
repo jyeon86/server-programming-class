@@ -7,9 +7,19 @@
   <body>
     <!-- 로그인 회원가입 로그아웃 아이디 표시 부분 -->
       <div align="right">
-       
+        <%
+          if(is_logined) {          
+        %>
+          <span><%= login_id %> 님 반갑습니다.</span>
+          <input type="button" value="로그아웃" onclick="window.location.href='http://localhost:3000/session/logout'">
+        <%
+          } else {
+        %>
           <input type="button" value="로그인" onclick="window.location.href='http://localhost:3000/session/login'">
           <input type="button" value="회원가입" onclick="window.location.href='http://localhost:3000/join'">
+        <%
+          }
+        %>
       </div>
     <!-- end of 로그인 회원가입 로그아웃 아이디 표시 부분 -->
 
@@ -57,6 +67,17 @@
           }
           %>
       </table>
+
+      <div>
+        <% 
+
+          for(var i = 1; i <= (total_write/3)+1; i++) {
+        %>
+            <span><a href="/page/<%= i %>"><%= i %></a></span>
+        <%
+          }
+        %>
+      </div>
       <form method="post" action="/search">
         <select name="searchTypeInput" id="searchTypeInput">
           <option value="title" selected="selected">글제목</option>
