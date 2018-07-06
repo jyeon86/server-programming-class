@@ -17,11 +17,11 @@ var pool = mysql.createPool({
 router.get('/page/:number_of_page', function(req, res, next) {
     var number_of_page = req.params.number_of_page;
     pool.getConnection(function(err, connection) {
-        var sql_count = "SELECT count(*) AS count from my_board;"
+        var sql_count = "SELECT count(*) AS count from my_board WHERE enable=1;"
         var number_of_count = 0;
         var sql = "SELECT * FROM my_board WHERE enable=1 " +
                     "ORDER BY create_at DESC " +
-                    "LIMIT 2 OFFSET " + number_of_page;
+                    "LIMIT 3 OFFSET " + ((number_of_page-1)*3);
 
         console.log(sql_count);
         console.log(sql);
