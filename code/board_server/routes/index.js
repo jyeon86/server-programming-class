@@ -24,13 +24,24 @@ router.get('/', function(req, res, next) {
                 throw err;
             }
 
+            //res.render('index', {rows : rows});
+            // 세션에 사용자 정보가 있는지 없는지에 따라 로그인 여부를 판단한다.
             if(req.session.user) {
+                // 사용자 정보가 있는 경우
+                // 사용자가 로그인 되어있는 상태이고,
+                // index.ejs를 불러오는데 
+                //사용자 아이디(req.session.user.user_id)를 전달한다.
                 res.render('index', { rows : rows, is_logined : true, 
-                    login_id : req.session.user.user_id });
-                    
+                    login_id : req.session.user.user_id });                    
             } else {
-                res.render('index', { rows : rows, is_logined : false, login_id : "" });   
+                // 사용자 정보가 있는 경우
+                // 사용자가 로그인되어 있지 않은 상태이고,
+                // index.ejs를 표시하는데
+                // 로그인이 되어 있지 않으므로, 사용자 아이디는 빈칸으로 보낸다.
+                res.render('index', { rows : rows, is_logined : false,
+                    login_id : "" });   
             }
+
             connection.release();
             
         });

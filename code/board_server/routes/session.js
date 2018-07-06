@@ -65,7 +65,9 @@ router.post('/login', function(req, res, next) {
 				connection.release();
 			});
 		});
-	} else {
+	}
+	// 이미 로그인된 경우는 게시판 페이지로 이동한다.
+	else {
 		res.redirect('http://localhost:3000/');
 	}
 });
