@@ -42,6 +42,7 @@ router.post('/del', function(req, res, next) {
         });
     });
 });
+
 router.get('/:idx', function(req, res, next) {
     var idx = req.params.idx; // 웹페이지 주소 정보가 req 객체에 들어가 있으므로 값을 가져옴
     
@@ -55,15 +56,21 @@ router.get('/:idx', function(req, res, next) {
                 throw err;
             }
 
+            // 데이터베이스 검색 결과에서 카테고리 값이 회원일 때
             if(rows[0].category == "회원") {
+                // 로그인을 했는지 체크한다.
+                // 만약 로그인이 되어 있다면, 세션에 사용자 정보가 있고
+                // 로그인이 되어 있지 않으면, 사용자 정보가 없다.
                 if(!req.session.user) {
+                    //사용자 정보가 세션에 없으면, 로그인 페이지로 이동
                     res.redirect('http://localhost:3000/session/login');
                     connection.release();
                     return;
                 }
             } 
 
-            var update_sql = "UPDATE my_board SET hit_count=hit_count+1 WHERE _idx="+idx;
+            var update_sql = 
+                "UPDATE my_board SET hit_count=hit_count+1 WHERE _idx="+idx;
             connection.query(update_sql, function(err, rows2) {
                 if(err) {// sql문 작성시 에러가 발생할 경우
                     connection.release();

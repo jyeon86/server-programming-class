@@ -14,6 +14,50 @@ var pool = mysql.createPool({
     waitForConnections : false
 });
 
+router.get('/page/:number_of_page', function(req, res, next) {
+    var number_of_page = req.params.number_of_page;
+    pool.getConnection(function(err, connection) {
+        var sql_count = "SELECT count(*) AS count from my_board;"
+        var number_of_count = 0;
+        var sql = "SELECT * FROM my_board WHERE enable=1 " +
+                    "ORDER BY create_at DESC " +
+                    "LIMIT 2 OFFSET " + number_of_page;
+
+        console.log(sql_count);
+        console.log(sql);
+        connection.query(sql_count, function(err, rows) {
+            if(err) {// sql문 작성시 에러가 발생할 경우
+                connection.release();
+                throw err;
+            }
+            total_write = rows[0].count;
+            console.log(total_write);
+
+            connection.query(sql, function(err, rows) {
+                if(err) {// sql문 작성시 에러가 발생할 경우
+                    connection.release();
+                    throw err;
+                }
+
+                if(req.session.user) {
+                    res.render('index', 
+                        { rows : rows, is_logined : true, 
+                            login_id : req.session.user.user_id,
+                            total_write : total_write });
+                        
+                } else {
+                    res.render('index', 
+                        { rows : rows, is_logined : false,
+                            login_id : "",
+                            total_write : total_write });   
+                }
+
+            });
+            connection.release();
+        });
+        
+    });
+});
 router.get('/', function(req, res, next) {
     // 데이터베이스를 활용하기 위해 풀에서 연결을 가져옴
     pool.getConnection(function(err, connection) {

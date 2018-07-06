@@ -67,6 +67,17 @@
           }
           %>
       </table>
+
+      <div>
+        <% 
+
+          for(var i = 1; i <= (total_write/2); i++) {
+        %>
+            <span><a href="/page/<%= i %>"><%= i %></a></span>
+        <%
+          }
+        %>
+      </div>
       <form method="post" action="/search">
         <select name="searchTypeInput" id="searchTypeInput">
           <option value="title" selected="selected">글제목</option>
