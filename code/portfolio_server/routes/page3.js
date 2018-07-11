@@ -16,21 +16,49 @@ var pool = mysql.createPool({
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	pool.getConnection(
-		function(err, connection) {
+	pool.getConnection(function(err, connection) {
+		if(err) {
+			throw err
+		}
+		var sql = "SELECT * FROM view_spotPage;"
+		// var sql = "SELECT * FROM spot;"
+		connection.query(sql, function(err, rows) {
 			if(err) {
+				connection.release();
 				throw err
 			}
-			var sql = "SELECT * FROM view_spotInfo;"
-			// var sql = "SELECT * FROM spot;"
-			connection.query(sql, function(err, rows) {
+			
+			connection.query("SELECT * FROM reply;", function(err, comment) {
 				if(err) {
+					connection.release();
 					throw err
 				}
-				console.dir(rows);
-				res.render('page3', { data : rows });
+				
+				for(var i = 0; i < rows.length; i++) {
+
+					var temp = [];
+					for(var j = 0; j < comment.length; j++) {
+						if(rows[i].spot_id == comment[j].spot_id) {
+							console.log("j : " + j);
+							temp.push(comment[j].contents);
+						}
+					}
+
+					rows[i].comment = temp;
+
+					if(i == rows.length-1) {
+						res.render('page3', { data : rows });
+						console.dir(rows);
+						connection.release();
+					}
+
+					temp = [];
+				}
+	
 			});
+
 		});
+	});
   
 });
 

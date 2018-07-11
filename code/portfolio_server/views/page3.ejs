@@ -81,7 +81,16 @@
                         </form>
                      
                         <ul class="reply-posts">
-                          <li>aaaa</li>
+
+                          <%
+                            var comment = data[i].comment;
+                            for(var j = 0; j < comment.length; j++) {
+                          %>
+                            <li><%= comment[j] %></li>
+                          <%
+                            }
+                          %>
+                          
                         </ul>
                       </div>
                     </div>
