@@ -1,0 +1,54 @@
+.reply-container {
+  padding:20px;
+}
+
+.reply-textarea {
+  width: 100%;
+}
+
+.reply-writer {
+  padding-bottom: 5px;
+}
+
+.reply-writer input{
+  width: 100%;
+}
+
+.reply-password {
+  padding-bottom: 5px;
+}
+
+.reply-password input {
+  width: 100%;
+}
+
+.reply-button-container {
+  text-align: right;
+}
+
+.reply-button-container p {
+  display: inline;
+}
+
+.reply-button-container input {
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+.reply-posts {
+  padding: 0;
+}
+.reply-posts li {
+  background-color: #fff;
+  border: 1.5px solid #d8d8d8;
+  border-radius: 10px;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+  min-height: 42px;
+  box-shadow:8px 8px 5px #888888;
+  list-style-type: none;
+}

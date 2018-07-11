@@ -21,15 +21,17 @@ router.get('/', function(req, res, next) {
 			if(err) {
 				throw err
 			}
-			var sql = "SELECT * FROM spot;"
+			var sql = "SELECT * FROM view_spotInfo;"
+			// var sql = "SELECT * FROM spot;"
 			connection.query(sql, function(err, rows) {
 				if(err) {
 					throw err
 				}
 				console.dir(rows);
+				res.render('page3', { data : rows });
 			});
 		});
-  res.render('page3', {  });
+  
 });
 
 module.exports = router;

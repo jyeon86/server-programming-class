@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!--기종에 따른 넓이고정-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
-    <title> 청남대</title>
+    <title>청남대</title>
 
     <!--  안드로이드(Android) -->
     <link rel="shortcut icon" href="/images/icon32x32.png" />
@@ -29,10 +29,8 @@
     <!-- swiper plugin CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.0/css/swiper.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.0/js/swiper.min.js"></script>
-    <style type="text/css">
     
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/reply_style.css">
 </head>
 
 <body id="body">
@@ -49,114 +47,50 @@
            </header>
            <main class="contents">
              <div class="list">
+                <%
+                  for(var i = 0; i < data.length; i++) {
+                %>
+                  <div class="item">
+                    <button type="button" class="icon calendar" onclick="location.href='app://place1'"><span>내 일정</span></button>
+                    <button type="button" class="icon close"><span>닫기</span></button>
+                    <a href="#" class="link">
+                       <div class="tit"><%= data[i].name %></div>
+                       <div class="img"><img src="<%= data[i].img_url %>" alt=""></div>
+                       <div class="phone">전화 : <%= data[i].phone_number %> </div>
 
-               <div class="item">
-                <button type="button" class="icon calendar" onclick="location.href='app://place1'"><span>내 일정</span></button>
-                <button type="button" class="icon close"><span>닫기</span></button>
-                <a href="#" class="link">
-                   <div class="tit">악휘봉</div>
-                   <div class="img"><img src="images/20090706223516.jpg" alt=""></div>
-                   <div class="phone">전화 : 043-251-3421, </div>
+                    </a>
+                      <div class="cont">
+                      <%- data[i].descript %>
 
-                </a>
-                  <div class="cont">
-                  일정 : <a href="app://place1"> 앱으로 연결</a>
-                  <p>악휘봉은 괴산군 연풍면과 칠성면 경계에 위치한 해발 845m의 산으로 백두대간의 본 줄기에서 한발짝 벗어난 절경의 산이다. </p>
-                  <p>악휘봉의 정상부근은 온통 기암괴석과 노송, 고사목으로 이루어져 한폭의 동양화를 연상케하는데 인근의 희양산에 비하여 바위의 덩치가 작을뿐 모양이나 기묘한 형상은 더 없이 아기자기하며 아름답다. 장바우 다리에서 10분쯤 가면 잘생긴 소나무 한그루가 아주 점잖게 서 있는데 마을 사람들은 이 나무를 가리켜 관송이라 부른다. 벼슬아치들의 관모를 닮았다하여 붙여진 이름이다. 그 옆에는 입석마을에 골골이 전해오는 얘기를 기록해 놓은 마을 자랑비가 자상하다. 입석마을에 도착하면 악휘봉 산 전체가 한눈에 들어온다. </p>
-                  <p>산행코스는 입석마을의 음지말 회관앞 광장에서 마을 가운데로 난 하천을 따라 다리를 두 번 건너 5분쯤가면 왼쪽으로 계류를 건너게 되며 수렛길을 따라 25분쯤 더 가게 되면 Y자 갈림길이 나온다. 오른쪽길은 하산로이며, 왼쪽은 은티골 계곡을 택해 5분정도 더 가면 집바위가 나오는데 6.25때 마을 사람들의 피난처였으며 지금은 비오기를 기원하는 기우제를 올리는 곳이다. 집바우에서 50m더 가면 반석을 타고 흘러 내리는 계류가 쉼터를 제공해 주고 여기서 물을 채워야 한다. 높은 나무가 하늘을 가린 호젓한 산속길은 평탄하게 이어지나, 고개까지 5분을 남기고는 가파라지기 시작하는데 쉼터를 떠나 30분정도면 은티로 넘어가는 안부 사거리에 닿게 된다. 고개를 넘으면 은티마을이고 왼쪽으로 난 길은 마분봉 가는 길로 30분 정도면 마분봉 정상에 닿을 수 있다. </p>
-                  <p>잠시 숨을 돌리고 오른쪽 바위를 휘돌아 오르면 몇 군데 훤히 트인 전망 좋은 장소가 있는데, 뒤돌아 보면 첩첩이 쌓인 산들과 가까이 무분봉이 환상적인 조화를 이룬다. 바위틈새를 맨몸으로도 간신히 빠지는 세미클라이밍 코스를 오르고 안부에서 30분정도면 동쪽 희양산, 구왕봉을 거쳐온 소백산맥이 맞닿고 100미터정도 더 가면 다시 소백산맥은 서쪽으로 악휘봉, 덕가산, 칠보산등 기기 묘묘한 바위산을 빚어내고 그 구비를 90도 돌려 장성봉을 향해 줄달음 친다. 장성봉 갈림길에서 10분쯤 서쪽으로 가면 악휘봉의 최고 걸작품 선바위 앞에 닿는다. 벼랑위에 4미터 정도의 높이로선 입석(立石)은 밑부분이 파석형태여서 보는이로 하여금 안타까움을 연출하고 있으며 여기서 정상은 2-3분 거리에 있다. 정상에는 악휘봉 표지석이 자그마하게 서 있으며 이곳에서의 조망은 감탄을 금치 못한다. </p>
-                  <p>북에서 동으로 멀게는 월악영봉에서부터 신선봉, 조령산, 주흘산 구비구비 아흔아홉 고개 이화령이 넘실거리고 동쪽으로 구왕봉, 희양산, 이만봉 서쪽으로 덕가산, 칠보산, 군자산의 위용이 눈앞에 거대한 파도처럼 일렁거린다. 하산은 서쪽으로 난 길을 10분정도 비탈길을 내려서면 보기에도 아찔한 바위가 앞을 가로막아 도저히 길이 있을 것 같지도 않지만 바위 40여미터 밧줄이 그나마 가야할 길임을 알려준다. 짜릿한 스릴을 맛보며 기어 오르는 바윗길은 마치 암벽 등반가라도 된 느낌이다. 힘겹게 올라보면 역시 보는 즐거움이 크다. 노송과 바위가 빚어낸 형용키 어려운 악휘봉의 모습에 쉽게 발걸음을 떼지 못하게 한다. </p>
-                  <p>잠시 숨을 돌리고 가파른길(마사토로 미끄럼주의)을 내려서면 하산길의 안부에 닿는다. 안부에서 북쪽의 하산길은 경사가 급해 뛰다시피 하여 내려오게 된다. 안부에서 25분 정도면 옹달샘처럼 생긴 계류의 샘에 닿고 목을 축인 후 5분정도 내려오면 올라갈 때의 Y자 갈림길까지 오게 된다. 여기서 입석마을까지는 30분이면 여유있게 갈 수 있다. </p>
+                      <div class="reply-container">
+                        <form>
+                          <div class="reply-writer">
+                            <input  type="text" id="writer" name="writer" placeholder="writer">
+                          </div>
+                          <div class="reply-password">
+                            <input type="text" id="password" name="password" placeholder="password">
+                          </div>   
+                          <div>
+                            <textarea class="reply-textarea"
+                            rows="3" placeholder="Enter your comment here..."></textarea>
+                          </div>
+                          <div class="reply-button-container">
+                            <p>250</p>
+                            <input type="submit" value="Comment">
+                          </div>
+                        </form>
+                     
+                        <ul class="reply-posts">
+                          <li>aaaa</li>
+                        </ul>
+                      </div>
+                    </div>
                  </div>
-               </div>
-               <!-- //item -->
-               <div class="item">
-                <button type="button" class="icon calendar" onclick="location.href='app://place2'"><span>내 일정</span></button>
-                <button type="button" class="icon close"><span>닫기</span></button>
-                <a href="#" class="link">
-                   <div class="tit">작은 용굴 분수대</div>
-                   <div class="img"><img src="images/20090728140355.jpg" alt=""></div>
-                   <div class="phone">전화 : 043-251-3421</div>
-                </a>
-                 <div class="cont">
-                  <p>문의면 구룡리 마을 뒤에 있는 석회암 동굴 유적으로 이 굴에서 용이 승천하였다는 전설이 있어 용굴이라 전해지며 석회암 지대에 발달된 수평동굴로서 크기는 입구 너비 260cm, 높이 350m, 길이 60m이며, 입구에서부터 32m되는 곳에 광장이 있다. 작은 용굴은 위치상 청원 두루봉동굴, 큰용굴 그리고 대청댐으로 수몰된 청원 샘골유적과 가까운 거리에 있고, 금강과도 멀지 않은 곳에 위치하고 있지만 현재 청원 두루봉동굴, 큰용굴, 샘골유적 등은 그 흔적을 찾을 수 없고 작은 용굴만이 그 형상을 보존하고 있다.</p>
-                  <p>문의문화재단지와 연계하여 청남대까지 이어지는 대청댐 주변의 수려한 자연경관은 연인 및 가족 단위의 하루 드라이브코스와 여름휴양지로 적합하며 연일 개방하고 있다. 원두막 4동에는 계절별로 인근지역에서 생산되는 각종 농특산물(포도, 밤, 고추, 표고등)을 판매하고 있으며 간단한 먹거리가 준비되어 있다.</p>
-                 </div>
-               </div>
-               <!-- //item -->
-
-               <div class="item">
-                <button type="button" class="icon calendar" onclick="location.href='app://place3'"><span>내 일정</span></button>
-                <button type="button" class="icon close"><span>닫기</span></button>
-                <a href="#" class="link">
-                   <div class="tit">문의문화재단지</div>
-                   <div class="img"><img src="images/20090728141101.jpg" alt=""></div>
-                   <div class="phone">전화 : 043-830-3421</div>
-                </a>
-                 <div class="cont">
-                   <p>문의문화재단지(文義文化材團地)는 인류문명의 발달과 급속한 산업화에 따라 사라져 가고 있는 우리의 고유 전통문화를 재현하여 조상들의 삶과 얼을 되살리고 배우기 위한 역사의 교육장으로 ’97에 개장하였다.</p>
-                   <p>약 3만3천평 규모의 부지위에 지방유형문화재 제49호인 문산관을 비롯하여 전통가옥, 민속자료전시관등 10동의 고건물과 장승, 연자방아, 성황당 등 옛 생활터전을 재현하여 약 50억원의 사업비가 투자되었다. 한편 4천여평의 주차장을 비롯하여 약수터, 놀이광장등 편의시설을 갖추어 대청호와 함께 호반의 명소로 부상하고 있다. 인접한 곳에 약 3천여평의 청소년수련관이 건립되어 명실상부한 종합휴양지로 조성되었다.</p>
-                 </div>
-               </div>
-               <!-- //item -->
-
-               <div class="item">
-                <button type="button" class="icon calendar" onclick="location.href='app://place4'"><span>내 일정</span></button>
-                <button type="button" class="icon close"><span>닫기</span></button>
-                <a href="#" class="link">
-                   <div class="tit">상수허브랜드</div>
-                   <div class="img"><img src="images/20090622173313.jpg" alt=""></div>
-                   <div class="phone">전화 : 043-830-3421</div>
-                </a>
-                 <div class="cont">
-                  <p>상수허브랜드는 허브에 관한 모든 것을 보고 느끼고 맛볼 수 있는 국내 최대의 허브농장이다. 지구상에 존재하는 것으로 알려진 2천5백여 종의 허브 가운데 5백여 종이 이곳에서 저마다 개성있는 향과 맛, 모양새를 뽐내고 있다.</p>
-
-                  <p>농원 규모는 1만3천평으로 자동 유리온실과 야외정원으로 나뉜다. 특히 수백 종의 허브 향이 복합된 3천평 크기의 자동유리온실 속은 허브의 나라 그 자체이다. 온실 한켠에는 라벤더실, 로즈마리실, 타임실, 커리프랜트실 등 13개의 전문 향기실을 별도로 만들어 허브차를 마시며 허브꽃을 감상할 수 있도록 해놓았다. 예쁜 토기에 담긴 허브는 1천∼5천원에 판매된다.</p>
-
-                  <p>야외정원은 색채와 향기를 고려해 테마가든으로 꾸몄다. 자연석 공룡 조각상이 정원의 멋을 더해준다. 허브산책로는 일명 ’스트레스 해소 길’로 불린다. 크고 작은 바위틈에까지 허브가 심어져 있다. 길 끝에는 산속 지하 암반에서 끌어올린 시원한 약수가 기다린다. 상수허브랜드는 허브를 길러 파는 곳이지만 허브를 이용한 갖가지 생활용품도 생산, 판매한다. 호텔이나 고급 레스토랑에서만 맛볼 수 있는 허브요리도 저렴한 가격에 즐길 수 있다.</p>
-
-                  <p>돔형의 3층 건물에는 허브제품을 판매하는 전시장과 레스토랑, 카페, 세미나실 등이 들어서 있다. 허브레스토랑에는 금강산의 만물상을 축소해서 만든 인공폭포를 배경으로 한 작은 규모의 라이브공연장도 있다.</p> 
-                  
-                 </div>
-               </div>
-               <!-- //item -->
-
-               <div class="item">
-                <button type="button" class="icon calendar" onclick="location.href='app://place5'"><span>내 일정</span></button>
-                <button type="button" class="icon close"><span>닫기</span></button>
-                <a href="#" class="link">
-                   <div class="tit">의암 손병희 유허지</div>
-                   <div class="img"><img src="images/20090728152451.jpg" alt=""></div>
-                   <div class="phone">전화 : 043-830-3421</div>
-                </a>
-                 <div class="cont">
-                   <p>한말 천도교의 지도자이자 독립운동가인 선생은 22세때 동학에 입교했고, 2년 후 교주 최시형을 만나 수제자로서 연성수도 하였으며, 1894년 동학농민운동 때 통령으로서 북접의 농민군을 이끌고 남접의 전봉준과 논산에서 합세하여 호남, 호서를 석권하고 북상하여 관군을 격파했으나 일본군의 개입으로 실패하고 원산 등지로 피신함.</p>
-                   <p>그 후 1906년 동학을 천도교로 개칭하고 제2대 교주에 추임하여 교세확장운동을 벌이는 한편, 보성.동덕 등의 학교를 인수하여 교육에 열중하였으며, 1908년에는 교주 자리를 물러나 우이동에 은거하며 수도에 힘쓰다가 1919년 민족대표 33인의 대표로 3.1운동을 주도하여 일제의 식민통치에 대한 경각심과 우리민족 모두에게 자주독립정신을 고취하였으며, 이로 인해 3년형을 선고받고 서대문형무소에서 복역하던 중 이듬해에 병보석으로 출감하여 치료를 받다가 사망함.</p>
-                   <p>11,690평의 널찍한 부지 위에 건립된 선생의 유허지는 생가.기념관.영당으로 구성돼 있는데, 생가는 정면 4칸, 측면 1칸 반의 초가집이다.</p>
-                 </div>
-               </div>
-               <!-- //item -->
-
-               <div class="item">
-                <button type="button" class="icon calendar" onclick="location.href='app://place6'"><span>내 일정</span></button>
-                <button type="button" class="icon close"><span>닫기</span></button>
-                <a href="#" class="link">
-                   <div class="tit">대청호</div>
-                   <div class="img"><img src="images/20090706223304.jpg" alt=""></div>
-                   <div class="phone">전화 : 043-830-3421</div>
-                </a>
-                 <div class="cont">
-                   <p>대청호는 금강의 한가운데 댐을 막아 만들어진 거대한 호수로 중부 내륙의 너른 들에 물줄기를 대는 중요한 수원지 역할을 한다. </p>
-
-                   <p>끝없이 이어지는 맑은 물과 호수 위에 섬처럼 떠있는 야산 그리고 새벽이면 물안개가 자욱이 떠오르고 낮에는 쪽빛 하늘과 흰구름이 한폭의 수채화를 연상시킨다. 물길을 따라 이어지다 사이사이 울창한 숲터널로 꼬리를 감추는 호반도로가 자리잡고 있는곳이 바로 대청호이다.</p>
-
-                   <p>대청호는 금강의 한가운데 댐을 막아 만들어진 거대한 호수로 중부 내륙의 너른 들에 물줄기를 대는 중요한 수원지 역할을 한다. 대청댐은 대전과 충북 청원군 사이에 놓여있으며 저수용량 14억9천만t 중부권에서는 충주호 다음으로 큰 호수로 해발 200∼300m의 야산과 끝없이 이어지고 있어 대청호반은 푸근하고 넉넉하다. 이런 뛰어난 경관에도 불구하고 일반에게 널리 알려지지 않은 이유는 청남대가 자리하고 있어서 80년대만해도 이곳에서 사진을 찍는 것도 금지할 정도였다.</p>
-
-                   <p>호수를 한바퀴 돌아 보은과 옥천으로 이어지는 건너편은 드라이브 코스로 제격이다. 화남면 쪽으로 이어지는 길은 울창한 가로수 터널이 그림같다. 한낮에도 길이 어두울 정도이며 가장자리에는 차를 세워두고 호수를 바라보며 데이트를 즐기는 연인들이 많다. 담수능력 : 149백만톤 전력생산량 : 196~240백만 kw/년 용수공급량 : 1649백만톤</p>
-
-                 </div>
-               </div>
-               <!-- //item -->
+                   <!-- //item -->
+                <%
+                  }
+                %>
+               
               
              </div>   
            </main>

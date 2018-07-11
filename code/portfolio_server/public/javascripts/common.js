@@ -8,11 +8,11 @@ $(document).ready(function(){
         sidebarEl += '</div>';
         sidebarEl += '<nav class="navi">';
         sidebarEl += '<ul>';
-        sidebarEl += '<li><a href="index.html">청남대 소개</a></li>';
-        sidebarEl += '<li><a href="page1.html">청남대 둘러보기</a></li>';
-        sidebarEl += '<li><a href="page2.html">청남대 지도보기</a></li>';
-        sidebarEl += '<li><a href="page3.html">주변관광정보</a></li>';
-        sidebarEl += '<li><a href="page4.html">이용안내</a></li>';
+        sidebarEl += '<li><a href="/">청남대 소개</a></li>';
+        sidebarEl += '<li><a href="/page1">청남대 둘러보기</a></li>';
+        sidebarEl += '<li><a href="/page2">청남대 지도보기</a></li>';
+        sidebarEl += '<li><a href="/page3">주변관광정보</a></li>';
+        sidebarEl += '<li><a href="/page4">이용안내</a></li>';
         sidebarEl += '</ul></nav></div>';
    		
    		$("body").append(sidebarEl);
