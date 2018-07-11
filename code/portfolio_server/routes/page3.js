@@ -40,7 +40,8 @@ router.get('/', function(req, res, next) {
 					for(var j = 0; j < comment.length; j++) {
 						if(rows[i].spot_id == comment[j].spot_id) {
 							console.log("j : " + j);
-							temp.push(comment[j].contents);
+							temp.push({ "writer" : comment[j].writer, 
+								"contents" : comment[j].contents });
 						}
 					}
 
