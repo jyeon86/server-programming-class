@@ -67,17 +67,47 @@
           }
           %>
       </table>
-
+<!-- 페이지 네이션 시작 -->
       <div>
-        <% 
 
-          for(var i = 1; i <= (total_write/3)+1; i++) {
+        <%
+          var times = 0;
+          if(total_write%3 == 0) {
+            times = (total_write/3);
+          } else {
+            times = (total_write/3) + 1;
+          }
+
+          for(var i = 1; i <= times; i++) {
+            if(type == "total") {
         %>
             <span><a href="/page/<%= i %>"><%= i %></a></span>
         <%
-          }
+            } else if(type == "normal") {
+        %>
+            <span><a href="/show_normal/<%= i %>"><%= i %></a></span>
+        <%
+            } else if(type == "member") {
+        %>
+            <span><a href="/show_member/<%= i %>"><%= i %></a></span>
+        <%
+            } else if(type == "title") {
+        %>
+            <span><a href="/search/title/<%= search_keyword %>/<%= i %>"><%= i %></a></span>
+        <%
+            } else if(type == "writer") {
+        %>
+            <span><a href="/search/writer/<%= search_keyword %>/<%= i %>"><%= i %></a></span>
+        <%
+            } else if(type == "number") {
+        %>
+            <span><a href="/search/number/<%= search_keyword %>/<%= i %>"><%= i %></a></span>
+        <%  
+            } else {}
+        }
         %>
       </div>
+<!-- end of 페이지 네이션 -->
       <form method="post" action="/search">
         <select name="searchTypeInput" id="searchTypeInput">
           <option value="title" selected="selected">글제목</option>

@@ -3,16 +3,23 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 var db_info = require('./db_info');
-var multer = require('multer'); // multer모듈 적용 (for 파일업로드) 
+
+/* 파일 업로드 관련 코드 */
+// 파일 업로드 기능을 수행하는 multer라는 모듈을 읽어온다.
+var multer = require('multer');  
+// 저장할 파일의 위치, 파일 이름 등을 설정하는 부분
 var storage = multer.diskStorage({ 
   destination: function (req, file, cb) { 
-    cb(null, './uploads/') // cb 콜백함수를 통해 전송된 파일 저장 디렉토리 설정 
+    cb(null, '../public/uploads/') // cb 콜백함수를 통해 전송된 파일 저장 디렉토리 설정 
   }, 
   filename: function (req, file, cb) { 
     cb(null, file.originalname) // cb 콜백함수를 통해 전송된 파일 이름 설정 
   } 
 });
+// upload객체를 만들어서 실제로 파일 업로드 처리를 수행
 var upload = multer({ storage: storage });
+
+/* end of 파일 업로드 관련 코드 */
 
 var pool = mysql.createPool({
     host : db_info.getHost(),

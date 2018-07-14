@@ -15,8 +15,7 @@
         if(title == "") { 
           alert("제목을 입력해야 합니다"); 
           return false; 
-        } 
-        if(name.length > 20) { 
+        } 행        if(name.length > 20) { 
           alert("이름은 20글자 이상 입력할 수 없습니다."); 
           return false; 
         } 
@@ -68,9 +67,11 @@
               <td>내용</td>
               <td><textarea name="contentsInput" id="contentsInput" rows="5" cals="40" placeholder="내용을 입력해주세요."></textarea></td>
           </tr>
+          <!-- 파일 업로드 -->
           <tr>
-            <td colspan="2"><input type="file" name="myFile"> 
+            <td colspan="2"><input type="file" name="myFile"></td> 
           </tr>
+          <!-- end of 파일 업로드 -->
           <tr>
             <td colspan="2"><input type="submit" value="글 등록하기"></td>
           </tr>
