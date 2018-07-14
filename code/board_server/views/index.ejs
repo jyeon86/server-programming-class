@@ -90,6 +90,18 @@
             } else if(type == "member") {
         %>
             <span><a href="/show_member/<%= i %>"><%= i %></a></span>
+        <%
+            } else if(type == "title") {
+        %>
+            <span><a href="/search/title/<%= search_keyword %>/<%= i %>"><%= i %></a></span>
+        <%
+            } else if(type == "writer") {
+        %>
+            <span><a href="/search/writer/<%= search_keyword %>/<%= i %>"><%= i %></a></span>
+        <%
+            } else if(type == "number") {
+        %>
+            <span><a href="/search/number/<%= search_keyword %>/<%= i %>"><%= i %></a></span>
         <%  
             } else {}
         }
