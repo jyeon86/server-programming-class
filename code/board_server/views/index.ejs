@@ -48,11 +48,11 @@
               <%
                 if(rows[i].noti == 1) {
               %>
-              <td><a href="./read/<%= rows[i]._idx %>"><b>[공지] </b><%= rows[i].title %></a></td>
+              <td><a href="/read/<%= rows[i]._idx %>"><b>[공지] </b><%= rows[i].title %></a></td>
               <%
                 } else {
               %>
-              <td><a href="./read/<%= rows[i]._idx %>"><%= rows[i].title %></a></td>
+              <td><a href="/read/<%= rows[i]._idx %>"><%= rows[i].title %></a></td>
               <%
                 }
               %>
